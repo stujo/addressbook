@@ -55,13 +55,13 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
-  def destroy
-    @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @contact.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

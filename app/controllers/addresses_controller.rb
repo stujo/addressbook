@@ -55,13 +55,13 @@ class AddressesController < ApplicationController
 
   # DELETE /addresses/1
   # DELETE /addresses/1.json
-  def destroy
-    @address.destroy
-    respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @address.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.

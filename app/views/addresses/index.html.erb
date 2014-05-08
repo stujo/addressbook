@@ -12,21 +12,24 @@
       <th>State</th>
       <th>Zip</th>
       <th>Contact</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
     </thead>
 
     <tbody>
     <% @addresses.each do |address| %>
         <tr class="contact_type_<%= address.address_type %>">
-          <td><%= address.street %> <%= address.street_2 %></td>
+          <td><%= address.street %>
+            <% if address.street_2 %>
+                &nbsp;<small>(<%= address.street_2 %>)</small>
+            <% end %>
+          </td>
           <td><%= address.city %></td>
           <td><%= address.state %></td>
           <td><%= address.zip %></td>
-          <td><%= link_to  address.full_name, address.contact  if address.contact %></td>
+          <td><%= link_to address.full_name, address.contact if address.contact %></td>
           <td><%= link_to 'Show', address %></td>
           <td><%= link_to 'Edit', edit_address_path(address) %></td>
-          <td><%= link_to 'Destroy', address, method: :delete, data: {confirm: 'Are you sure?'} %></td>
         </tr>
     <% end %>
     </tbody>
