@@ -44,7 +44,7 @@ gem 'rspec-rails', group: [:development, :test]
 
 
 gem 'kaminari'
-gem 'bootstrap-kaminari-views'
+#gem 'bootstrap-kaminari-views'
 
 gem 'quiet_assets'
 

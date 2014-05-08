@@ -7,8 +7,5 @@ Rails.application.routes.draw do
 
   resources :contacts
 
-  get '/search', to: 'search#quick_search', as: :quick_search
-
-  post '/search', to: 'search#advanced_search', as: :advanced_search
-
+  get '/search', to: 'search#contacts', as: :search_contacts
 end
