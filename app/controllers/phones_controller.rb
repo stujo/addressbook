@@ -4,10 +4,9 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.json
   def index
-    @page_number = 1
-    @page_number = params[:page] if params.has_key? :page
-    @phones = Phone.page(@page_number).per(5)
+    @phones = Phone.page(pagination_page_number).per(pagination_page_size)
   end
+
 
   # GET /phones/1
   # GET /phones/1.json

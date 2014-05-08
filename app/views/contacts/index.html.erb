@@ -12,23 +12,23 @@
       <th>Date of Birth</th>
       <th colspan="2"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.first_name %></td>
-        <td><%= contact.last_name %></td>
-        <td><%= contact.dob %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-      </tr>
+        <tr>
+          <td><%= contact.first_name %></td>
+          <td><%= contact.last_name %></td>
+          <td><%= contact.dob %></td>
+          <td><%= link_to 'Show', contact %></td>
+          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
-</div>
 
 <%= link_to new_contact_path, :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>

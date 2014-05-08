@@ -4,9 +4,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @page_number = 1
-    @page_number = params[:page] if params.has_key? :page
-    @addresses = Address.page(@page_number).per(5)
+    @addresses = Address.page(pagination_page_number).per(pagination_page_size)
   end
 
   # GET /addresses/1

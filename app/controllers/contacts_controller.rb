@@ -4,9 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @page_number = 1
-    @page_number = params[:page] if params.has_key? :page
-    @contacts = Contact.page(@page_number).per(5)
+    @contacts = Contact.page(pagination_page_number).per(pagination_page_size)
   end
 
   # GET /contacts/1
