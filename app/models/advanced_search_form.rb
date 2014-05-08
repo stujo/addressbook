@@ -1,7 +1,7 @@
 class AdvancedSearchForm
   include ActiveModel::Model
 
-  attr_accessor :first_name, :last_name, :zip, :sorting
+  attr_accessor :first_name, :last_name, :zip, :phone, :sorting
 
   attr_accessor :preload_addresses, :preload_phones
 
@@ -30,7 +30,15 @@ class AdvancedSearchForm
     if self.zip.blank?
       scope
     else
-      scope.includes(:addresses).where("addresses.zip" => self.zip)
+      scope.joins(:addresses).where("addresses.zip" => self.zip)
+    end
+  end
+
+  def phone_scope scope
+    if self.phone.blank?
+      scope
+    else
+      scope.joins(:phones).where("phones.digits LIKE :phone_like_match", {phone_like_match: "%#{self.phone}%" })
     end
   end
 
@@ -53,7 +61,7 @@ class AdvancedSearchForm
 
   def get_contacts
 
-    scope = Contact.all
+    scope = Contact.all.uniq
 
     # Add Each Scope
     # Each of these methods just returns the original scope if

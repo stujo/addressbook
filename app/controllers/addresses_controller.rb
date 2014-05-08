@@ -4,7 +4,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.page(pagination_page_number).per(pagination_page_size)
+    @addresses = prep_pagination Address.all
   end
 
   # GET /addresses/1

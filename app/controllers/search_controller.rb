@@ -2,14 +2,15 @@ class SearchController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  def pagination_page_size
+    4 # Because we display full data
+  end
+
   def contacts
     @search_form = SearchForm.new(search_params)
     if (@search_form.valid?)
       @contacts = @search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
     end
-
-    #Empty Advanced Search Form
-    @advanced_search_form = AdvancedSearchForm.new
   end
 
   def advanced_contacts
@@ -19,20 +20,21 @@ class SearchController < ApplicationController
       @advanced_search_form.preload_addresses = true
       @contacts = @advanced_search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
     end
-
-    render :contacts
   end
-
 
   private
-  def search_params
-    # I would like to put this in the SearchForm class but left it here to be clearer
-    params.require(:search_form).permit(:q)
+  def advanced_search_params
+    if (params.has_key? :advanced)
+      # I would like to put this in the AdvancedSearchForm class but left it here to be clearer
+      params.require(:advanced).permit(:last_name, :first_name, :zip, :phone, :sorting)
+    end
   end
 
-  def advanced_search_params
-    # I would like to put this in the AdvancedSearchForm class but left it here to be clearer
-    params.require(:advanced).permit(:last_name, :first_name, :zip, :sorting)
+  def search_params
+    if (params.has_key? :search_form)
+      # I would like to put this in the SearchForm class but left it here to be clearer
+      params.require(:search_form).permit(:q)
+    end
   end
 
 end

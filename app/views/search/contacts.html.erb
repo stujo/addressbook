@@ -1,63 +1,9 @@
 <div class="page-header">
-  <h1>Advanced Contacts Search</h1>
+  <h1>Search Results for <i><%= @search_form.q %></i></h1>
 </div>
 
+<div class="well">
+  <%= link_to 'Need More Tools? - Try Our Advanced Search', search_advanced_contacts_path %>
+</div>
 
-<%= form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
-    <% if @advanced_search_form.errors.any? %>
-        <div id="error_explanation">
-          <ul>
-            <% @advanced_search_form.errors.each do |field, message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-
-    <div class="form-group">
-      <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
-      <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
-      <%= f.text_field :zip, class: 'form-control', placeholder: 'Zipcode' %>
-      <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
-    </div>
-    <div class="form-group">
-      <%= f.button 'Search', class: 'btn btn-primary' %>
-    </div>
-<% end %>
-
-<% unless @contacts.blank? %>
-
-    <div>
-      <%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
-    </div>
-
-    <div class="contacts">
-      <% @contacts.each do |contact| %>
-          <div class="contact">
-            <div class="caption">
-              <div class="pull-right">
-                <%= link_to('Show', contact_path(contact), {class: 'btn btn-default'}) %>
-                <%= link_to('Edit', edit_contact_path(contact), {class: 'btn btn-default'}) %>
-              </div>
-              <h3><%= link_to contact.full_name, contact %></h3>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-md-6">
-                <%= render partial: 'phones/cards', locals: {phones: contact.phones} %>
-              </div>
-              <div class="col-sm-6 col-md-6">
-                <%= render partial: 'addresses/cards', locals: {addresses: contact.addresses} %>
-              </div>
-            </div>
-          </div>
-      <% end %>
-    </div>
-
-    <div>
-      <%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
-    </div>
-
-<% else %>
-    <div>There are no contacts matching your search</div>
-<% end %>
+<%= render partial: 'contacts_results', locals: {contacts: @contacts} %>

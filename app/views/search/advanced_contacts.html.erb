@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Advanced Contacts Search</h1>
+</div>
+
+
+<%= form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
+    <% if @advanced_search_form.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @advanced_search_form.errors.each do |field, message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+    <div class="form-group">
+      <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+      <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+      <%= f.text_field :zip, class: 'form-control', placeholder: 'Zipcode' %>
+      <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
+      <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
+    </div>
+    <div class="form-group">
+      <%= f.button 'Search', class: 'btn btn-primary' %>
+    </div>
+<% end %>
+
+<%= render partial: 'contacts_results', locals: {contacts: @contacts} %>

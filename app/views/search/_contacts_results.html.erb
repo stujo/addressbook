@@ -1,0 +1,36 @@
+
+<% unless contacts.blank? %>
+
+    <div>
+      <%= paginate contacts, :theme => 'twitter-bootstrap-3' %>
+    </div>
+
+    <div class="contacts">
+      <% contacts.each do |contact| %>
+          <div class="contact">
+            <div class="caption">
+              <div class="pull-right">
+                <%= link_to('Show', contact_path(contact), {class: 'btn btn-default'}) %>
+                <%= link_to('Edit', edit_contact_path(contact), {class: 'btn btn-default'}) %>
+              </div>
+              <h3><%= link_to contact.full_name, contact %></h3>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <%= render partial: 'phones/cards', locals: {phones: contact.phones} %>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <%= render partial: 'addresses/cards', locals: {addresses: contact.addresses} %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= paginate contacts, :theme => 'twitter-bootstrap-3' %>
+    </div>
+
+<% else %>
+    <div>There are no contacts matching your search</div>
+<% end %>

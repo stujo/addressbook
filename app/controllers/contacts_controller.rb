@@ -4,7 +4,13 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.page(pagination_page_number).per(pagination_page_size)
+    @contacts = prep_pagination Contact.all
+  end
+
+  def over50s
+    @today = Time.now
+    @then = @today - 50.years
+    @contacts = prep_pagination Contact.where('dob < :then', {then: @then} )
   end
 
   # GET /contacts/1

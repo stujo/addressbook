@@ -4,7 +4,7 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.json
   def index
-    @phones = Phone.page(pagination_page_number).per(pagination_page_size)
+    @phones = prep_pagination Phone.all
   end
 
 

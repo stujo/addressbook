@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def prep_pagination scope
+    scope.page(pagination_page_number).per(pagination_page_size)
+  end
 
   def pagination_page_number
     @page_number = 1
@@ -10,6 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
   def pagination_page_size
-    4
+    10
   end
+
+
 end

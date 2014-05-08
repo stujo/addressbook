@@ -60,7 +60,6 @@ if Object.const_get('Contact')
   will = seeder Contact, :first_name, {first_name: 'William', last_name: 'Hilson', dob: Date.parse('1967-04-13')}
   john = seeder Contact, :first_name, {first_name: 'John', last_name: 'Hammer', dob: Date.parse('1989-02-03')}
   karla = seeder Contact, :first_name, {first_name: 'Karla', last_name: 'Tillen', dob: Date.parse('1991-02-19')}
-  robin = seeder Contact, :first_name, {first_name: 'Robin', last_name: 'Wilson', dob: Date.parse('1990-04-28')}
 
   Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 104', city: 'San Francisco', state: 'CA', zip: '94012', contact: bob})
   Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 101', city: 'San Francisco', state: 'CA', zip: '94012', contact: jane})
@@ -72,6 +71,24 @@ if Object.const_get('Contact')
   Phone.find_or_create_by!({phone_type: :is_office, digits: '(415) 555-6387', contact: walter})
   Phone.find_or_create_by!({phone_type: :is_other, digits: '(707) 555-1412', contact: walter})
   Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-6335', contact: paula})
+
+
+  billy_phone_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Phone Only', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_address_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Address Only', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_both = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Both', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_none = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'None', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+
+  Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-7777', contact: billy_phone_only})
+
+  Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-8888', contact: billy_both})
+
+  Address.find_or_create_by!({address_type: :is_other, street: '1000 East', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_address_only})
+
+  Address.find_or_create_by!({address_type: :is_other, street: '414 South', city: 'Boston', state: 'MA', zip: '02123', contact: billy_address_only})
+
+  Address.find_or_create_by!({address_type: :is_other, street: '1000 North', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_both})
+
+
 
 end
 
