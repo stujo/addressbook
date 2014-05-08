@@ -3,6 +3,8 @@ class AdvancedSearchForm
 
   attr_accessor :first_name, :last_name, :zip, :sorting
 
+  attr_accessor :preload_addresses, :preload_phones
+
   def persisted?
     false
   end
@@ -51,7 +53,7 @@ class AdvancedSearchForm
 
   def get_contacts
 
-    scope = starting_scope
+    scope = Contact.all
 
     # Add Each Scope
     # Each of these methods just returns the original scope if
@@ -61,11 +63,15 @@ class AdvancedSearchForm
     scope = zip_scope(scope)
     scope = sorting_scope(scope)
 
-    scope
-  end
+    #Pre load associations if instructed
+    if @preload_addresses
+      scope = scope.includes(:addresses);
+    end
+    if @preload_phones
+      scope = scope.includes(:phones);
+    end
 
-  def starting_scope
-    Contact.all
+    scope
   end
 
 end

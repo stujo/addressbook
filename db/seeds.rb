@@ -25,8 +25,8 @@ if Object.const_get('Contact')
 
   address_types = [:is_office, :is_home, :is_other]
 
-  first_names = ['Bob', 'John', 'Jane', 'Sarah', 'Mary', 'Alan', 'Peter', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
-  last_names = ['Jones', 'Smith', 'Williams', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
+  first_names = ['Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Alan', 'Peter', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
+  last_names = ['Jones', 'Smith', 'Williams', 'Evans', 'Tilly', 'Thompson', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
 
   birth_years = (1900..2000).to_a
   birth_months = (1..12).to_a
@@ -34,19 +34,21 @@ if Object.const_get('Contact')
 
   rnd_numbers = (1..100).to_a
   digits = (1000..6000).to_a
-  areas = [415,510,650]
+  areas = [415, 510, 650]
 
   first_names.each do |first_name|
     last_names.each do |last_name|
       contact = Contact.find_or_create_by!({first_name: first_name, last_name: last_name, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
-      2.times do
-        add = {address_type: address_types.sample, street: "#{rnd_numbers.sample} #{streets.sample}", street_2: "##{rnd_numbers.sample}", city: cities.sample, state: 'CA', zip: zips.sample, contact: contact};
+      (0..4).to_a.sample.times do
+        add = {address_type: address_types.sample, street: "#{rnd_numbers.sample} #{streets.sample}", city: cities.sample, state: 'CA', zip: zips.sample, contact: contact};
+        #make some with apt numbers
+        add[:street_2] = "##{rnd_numbers.sample}" if rnd_numbers.sample > 60
         Address.find_or_create_by!(add)
-        Phone.find_or_create_by!({phone_type: address_types.sample, digits: "(#{areas.sample}) 555-#{digits.sample}", contact: contact})
-
       end
-
+      (0..4).to_a.sample.times do
+        Phone.find_or_create_by!({phone_type: address_types.sample, digits: "(#{areas.sample}) 555-#{digits.sample}", contact: contact})
+      end
     end
   end
 

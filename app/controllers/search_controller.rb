@@ -15,6 +15,8 @@ class SearchController < ApplicationController
   def advanced_contacts
     @advanced_search_form = AdvancedSearchForm.new(advanced_search_params)
     if (@advanced_search_form.valid?)
+      @advanced_search_form.preload_phones = true
+      @advanced_search_form.preload_addresses = true
       @contacts = @advanced_search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
     end
 
