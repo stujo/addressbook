@@ -28,10 +28,12 @@
   </table>
 </div>
 
-<%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
-
-<%= link_to new_contact_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    Add Contact
-<% end %>
-
+<div>
+  <%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
+</div>
+<div>
+  <%= link_to new_contact_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Add Contact
+  <% end %>
+</div>

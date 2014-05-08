@@ -21,7 +21,8 @@
         <tr class="contact_type_<%= address.address_type %>">
           <td><%= address.street %>
             <% if address.street_2 %>
-                &nbsp;<small>(<%= address.street_2 %>)</small>
+                &nbsp;
+                <small>(<%= address.street_2 %>)</small>
             <% end %>
           </td>
           <td><%= address.city %></td>
@@ -35,10 +36,12 @@
     </tbody>
   </table>
 </div>
-<%= paginate @addresses, :theme => 'twitter-bootstrap-3' %>
-
-<%= link_to new_address_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    Add Address
-<% end %>
-
+<div>
+  <%= paginate @addresses, :theme => 'twitter-bootstrap-3' %>
+</div>
+<div>
+  <%= link_to new_address_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Add Address
+  <% end %>
+</div>

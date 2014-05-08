@@ -25,10 +25,13 @@
     </tbody>
   </table>
 </div>
-<%= paginate @phones, :theme => 'twitter-bootstrap-3' %>
+<div>
+  <%= paginate @phones, :theme => 'twitter-bootstrap-3' %>
+</div>
 
-<%= link_to new_phone_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    Add Phone
-<% end %>
-
+<div>
+  <%= link_to new_phone_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Add Phone
+  <% end %>
+</div>

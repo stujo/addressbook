@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token
+
 
   def quick_search
     @search_form = SearchForm.new(params.permit(:q))
@@ -15,7 +17,7 @@ class SearchController < ApplicationController
 
   def run_search
     if (@search_form.valid?)
-      @contacts = @search_form.get_contacts.page(@oage_number).per(5)
+      @contacts = @search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
     end
     render :search_contacts
   end

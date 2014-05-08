@@ -1,0 +1,22 @@
+<% unless addresses.blank? %>
+    <div class="addresses-card">
+      <div class="addresses-header">Addresses</div>
+      <table class="table table-striped">
+        <% addresses.each do |address| %>
+            <tr>
+              <td>
+                <span class="street"><%= address.street %></span>
+                <span class="street_2"><%= address.street_2 %></span>
+                <br/>
+                <span class="city"><%= address.city %></span>
+                <span class="state"><%= address.state %></span>
+                <span class="zip"><%= address.zip %></span>
+              </td>
+              <td align="right">
+                <%= link_to('Edit', edit_address_path(address)) %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+<% end %>

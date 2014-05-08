@@ -1,0 +1,14 @@
+<% unless phones.blank? %>
+    <div class="phones-card">
+      <div class="phones-header">Phone Numbers</div>
+      <!-- Table -->
+      <table class="table table-striped">
+        <% phones.each do |phone| %>
+            <tr>
+              <td><%= phone.digits %></td>
+              <td align="right"><%= link_to('Edit', edit_phone_path(phone)) %></td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+<% end %>
