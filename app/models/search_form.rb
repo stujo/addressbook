@@ -1,7 +1,7 @@
 class SearchForm
   include ActiveModel::Model
 
-  attr_accessor :q #Generic Search
+  attr_accessor :q #Generic NAME Search
 
   #validates_length_of :q, minimum: 3, message: 'Please enter at least 3 letters to search'
 

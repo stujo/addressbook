@@ -3,11 +3,11 @@
 </div>
 
 
-<%= form_for(@search_form, url: search_contacts_path, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
-    <% if @search_form.errors.any? %>
+<%= form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
+    <% if @advanced_search_form.errors.any? %>
         <div id="error_explanation">
           <ul>
-            <% @search_form.errors.each do |field, message| %>
+            <% @advanced_search_form.errors.each do |field, message| %>
                 <li><%= message %></li>
             <% end %>
           </ul>
@@ -16,7 +16,10 @@
 
 
     <div class="form-group">
-      <%= f.text_field :q, class: 'form-control', placeholder: 'Name' %>
+      <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+      <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+      <%= f.text_field :zip, class: 'form-control', placeholder: 'Zipcode' %>
+      <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
     </div>
     <div class="form-group">
       <%= f.button 'Search', class: 'btn btn-primary' %>
