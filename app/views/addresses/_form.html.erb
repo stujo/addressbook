@@ -13,8 +13,9 @@
 
   <div class="field">
     <%= f.label :address_type %><br>
-    <%= f.text_field :address_type %>
+    <%= f.select :address_type, options_for_select(Address.address_types.keys, selected: @address.address_type), {} , class: "form-control" %>
   </div>
+
   <div class="field">
     <%= f.label :street %><br>
     <%= f.text_field :street %>

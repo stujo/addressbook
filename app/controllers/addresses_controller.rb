@@ -4,7 +4,9 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @page_number = 1
+    @page_number = params[:page] if params.has_key? :page
+    @addresses = Address.page(@page_number).per(5)
   end
 
   # GET /addresses/1
@@ -62,13 +64,13 @@ class AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_address
+    @address = Address.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def address_params
-      params.require(:address).permit(:address_type, :street, :street_2, :city, :state, :zip, :contact_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def address_params
+    params.require(:address).permit(:address_type, :street, :street_2, :city, :state, :zip, :contact_id)
+  end
 end
