@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def pagination_page_size
-    5
+    4
   end
 end

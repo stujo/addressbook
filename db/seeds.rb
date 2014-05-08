@@ -16,7 +16,24 @@ def seeder model, key, data
 end
 
 
+
+
 if Object.const_get('Contact')
+
+  first_names = ['Bob', 'John','Jane','Sarah','Mary','Alan','Peter','Paula','Dana','Karla','Minnie','Marge'];
+  last_names = ['Jones', 'Smith','Williams','McDonald','White','Milford','Johnson','Green','Black','Simpson','Riley'];
+
+  birth_years = (1900..2000).to_a
+  birth_months = (1..12).to_a
+  birth_days = (1..28).to_a
+
+  first_names.each do |first_name|
+    last_names.each do |last_name|
+      Contact.find_or_create_by!({first_name: first_name, last_name: last_name, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+    end
+  end
+
+
   bob = seeder Contact, :first_name, {first_name: 'Bob', last_name: 'Williams', dob: Date.parse('1980-02-03')}
   jane = seeder Contact, :first_name, {first_name: 'Jane', last_name: 'Smith', dob: Date.parse('1972-06-09')}
   walter = seeder Contact, :first_name, {first_name: 'Walter', last_name: 'White', dob: Date.parse('2001-07-05')}

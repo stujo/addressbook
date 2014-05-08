@@ -3,7 +3,7 @@
 </div>
 
 
-<%= form_for(@search_form, url: advanced_search_path, html: {class: "form-inline addressbook-inline"}) do |f| %>
+<%= form_for(@search_form, url: advanced_search_path, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
     <% if @search_form.errors.any? %>
         <div id="error_explanation">
           <ul>
@@ -19,7 +19,7 @@
       <%= f.text_field :q, class: 'form-control', placeholder: 'Name' %>
     </div>
     <div class="form-group">
-      <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <%= f.button 'Search', class: 'btn btn-primary' %>
     </div>
 <% end %>
 
