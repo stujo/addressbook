@@ -1,29 +1,33 @@
 <%= form_for(@phone) do |f| %>
-  <% if @phone.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@phone.errors.count, "error") %> prohibited this phone from being saved:</h2>
+    <% if @phone.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@phone.errors.count, "error") %> prohibited this phone from being saved:</h2>
 
-      <ul>
-      <% @phone.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @phone.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :phone_type %>
+      <br>
+      <%= f.select :phone_type, phone_types_for_select(@phone), {}, class: "form-control" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :phone_type %><br>
-    <%= f.text_field :phone_type %>
-  </div>
-  <div class="field">
-    <%= f.label :digits %><br>
-    <%= f.text_field :digits %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_id %><br>
-    <%= f.text_field :contact_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :digits %>
+      <br>
+      <%= f.text_field :digits %>
+    </div>
+    <div class="field">
+      <%= f.label :contact_id %>
+      <br>
+      <%= f.select(:contact_id, contacts_for_select, { include_blank: true} , {class: "form-control"})  %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

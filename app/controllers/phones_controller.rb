@@ -4,7 +4,9 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.json
   def index
-    @phones = Phone.all
+    @page_number = 1
+    @page_number = params[:page] if params.has_key? :page
+    @phones = Phone.page(@page_number).per(5)
   end
 
   # GET /phones/1
@@ -62,13 +64,13 @@ class PhonesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_phone
-      @phone = Phone.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_phone
+    @phone = Phone.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def phone_params
-      params.require(:phone).permit(:phone_type, :digits, :contact_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def phone_params
+    params.require(:phone).permit(:phone_type, :digits, :contact_id)
+  end
 end
