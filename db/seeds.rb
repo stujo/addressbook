@@ -25,7 +25,7 @@ if Object.const_get('Contact')
 
   address_types = [:is_office, :is_home, :is_other]
 
-  first_names = ['Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Alan', 'Peter', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
+  first_names = ['Alan', 'Peter', 'Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
   last_names = ['Jones', 'Smith', 'Williams', 'Evans', 'Tilly', 'Thompson', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
 
   birth_years = (1900..2000).to_a
@@ -38,7 +38,11 @@ if Object.const_get('Contact')
 
   first_names.each do |first_name|
     last_names.each do |last_name|
-      contact = Contact.find_or_create_by!({first_name: first_name, last_name: last_name, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+
+      name_index = (0... first_names.length).to_a.sample
+      gender = name_index < 4 ? Contact::GENDER_MALE : Contact::GENDER_FEMALE
+
+      contact = Contact.find_or_create_by!({first_name: first_names[name_index], last_name: last_name, gender: gender, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
       (0..4).to_a.sample.times do
         add = {address_type: address_types.sample, street: "#{rnd_numbers.sample} #{streets.sample}", city: cities.sample, state: 'CA', zip: zips.sample, contact: contact};
@@ -53,13 +57,13 @@ if Object.const_get('Contact')
   end
 
 
-  bob = seeder Contact, :first_name, {first_name: 'Bob', last_name: 'Williams', dob: Date.parse('1980-02-03')}
-  jane = seeder Contact, :first_name, {first_name: 'Jane', last_name: 'Smith', dob: Date.parse('1972-06-09')}
-  walter = seeder Contact, :first_name, {first_name: 'Walter', last_name: 'White', dob: Date.parse('2001-07-05')}
-  paula = seeder Contact, :first_name, {first_name: 'Paula', last_name: 'Jones', dob: Date.parse('1992-04-01')}
-  will = seeder Contact, :first_name, {first_name: 'William', last_name: 'Hilson', dob: Date.parse('1967-04-13')}
-  john = seeder Contact, :first_name, {first_name: 'John', last_name: 'Hammer', dob: Date.parse('1989-02-03')}
-  karla = seeder Contact, :first_name, {first_name: 'Karla', last_name: 'Tillen', dob: Date.parse('1991-02-19')}
+  bob = seeder Contact, :first_name, {first_name: 'Bob', gender: Contact::GENDER_MALE, last_name: 'Williams', dob: Date.parse('1980-02-03')}
+  jane = seeder Contact, :first_name, {first_name: 'Jane', gender: Contact::GENDER_FEMALE, last_name: 'Smith', dob: Date.parse('1972-06-09')}
+  walter = seeder Contact, :first_name, {first_name: 'Walter', gender: Contact::GENDER_MALE, last_name: 'White', dob: Date.parse('2001-07-05')}
+  paula = seeder Contact, :first_name, {first_name: 'Paula', gender: Contact::GENDER_FEMALE, last_name: 'Jones', dob: Date.parse('1992-04-01')}
+  will = seeder Contact, :first_name, {first_name: 'William', gender: Contact::GENDER_MALE, last_name: 'Hilson', dob: Date.parse('1967-04-13')}
+  john = seeder Contact, :first_name, {first_name: 'John', gender: Contact::GENDER_MALE, last_name: 'Hammer', dob: Date.parse('1989-02-03')}
+  karla = seeder Contact, :first_name, {first_name: 'Karla', gender: Contact::GENDER_FEMALE, last_name: 'Tillen', dob: Date.parse('1991-02-19')}
 
   Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 104', city: 'San Francisco', state: 'CA', zip: '94012', contact: bob})
   Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 101', city: 'San Francisco', state: 'CA', zip: '94012', contact: jane})
@@ -73,10 +77,10 @@ if Object.const_get('Contact')
   Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-6335', contact: paula})
 
 
-  billy_phone_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Phone Only', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
-  billy_address_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Address Only', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
-  billy_both = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Both', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
-  billy_none = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'None', dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_phone_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Phone Only', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_address_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Address Only', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_both = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Both', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+  billy_none = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'None', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
   Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-7777', contact: billy_phone_only})
 
@@ -87,7 +91,6 @@ if Object.const_get('Contact')
   Address.find_or_create_by!({address_type: :is_other, street: '414 South', city: 'Boston', state: 'MA', zip: '02123', contact: billy_address_only})
 
   Address.find_or_create_by!({address_type: :is_other, street: '1000 North', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_both})
-
 
 
 end

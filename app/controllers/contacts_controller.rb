@@ -11,6 +11,20 @@ class ContactsController < ApplicationController
     @today = Time.now
     @then = @today - 50.years
     @contacts = prep_pagination Contact.where('dob < :then', {then: @then} )
+    @filter_label = 'Over 50\'s'
+    render 'filtered'
+  end
+
+  def males
+    @contacts = prep_pagination Contact.where(gender: Contact::GENDER_MALE)
+    @filter_label = 'Males'
+    render 'filtered'
+  end
+
+  def females
+    @contacts = prep_pagination Contact.females
+    @filter_label = 'Females'
+    render 'filtered'
   end
 
   # GET /contacts/1

@@ -7,7 +7,7 @@
 
     <div class="contacts">
       <% contacts.each do |contact| %>
-          <div class="contact">
+          <div class="contact <%= contact_card_class contact %>">
             <div class="caption">
               <div class="pull-right">
                 <%= link_to('Show', contact_path(contact), {class: 'btn btn-default'}) %>

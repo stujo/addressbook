@@ -9,7 +9,7 @@ class SearchController < ApplicationController
   def contacts
     @search_form = SearchForm.new(search_params)
     if (@search_form.valid?)
-      @contacts = @search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
+      @contacts = prep_pagination @search_form.get_contacts
     end
   end
 
@@ -18,7 +18,7 @@ class SearchController < ApplicationController
     if (@advanced_search_form.valid?)
       @advanced_search_form.preload_phones = true
       @advanced_search_form.preload_addresses = true
-      @contacts = @advanced_search_form.get_contacts.page(pagination_page_number).per(pagination_page_size)
+      @contacts = prep_pagination @advanced_search_form.get_contacts
     end
   end
 

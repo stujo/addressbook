@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+
+.addressbook-debugging{
+  margin-top: 20px;
+}

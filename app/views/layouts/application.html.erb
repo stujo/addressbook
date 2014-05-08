@@ -55,6 +55,20 @@
 
 <div class="container">
   <%= yield %>
+
+  <% if @pagintation_scopes %>
+      <div class="addressbook-debugging panel panel-default">
+        <div class="panel-heading">Debugging SQL</div>
+        <div class="panel-panel">
+          <% @pagintation_scopes.each do |scope| %>
+<pre>
+  <%= scope.to_sql %>
+</pre>
+          <% end %>
+
+        </div>
+      </div>
+  <% end %>
 </div>
 </body>
 </html>

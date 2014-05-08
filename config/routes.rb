@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :contacts do
     collection do
       get 'over50s'
+      get 'males'
+      get 'females'
     end
   end
 
