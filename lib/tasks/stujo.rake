@@ -58,12 +58,10 @@ end
 
       load rb_file
 
-      puts "Git Update: #{Stujo::Git::SGV_TAG} #{Stujo::Git::CURRENT_BRANCH},#{Stujo::Git::CURRENT_COMMIT},#{Stujo::Git::UPDATED_ON}"
+      puts "Git Update: #{Stujo::Git::SGV_TAG},#{Stujo::Git::CURRENT_BRANCH},#{Stujo::Git::CURRENT_COMMIT},#{Stujo::Git::UPDATED_ON}"
 
       puts `git add #{rb_file}`
-      puts `git commit -m'Git Version #{CURRENT_BRANCH},#{CURRENT_COMMIT},#{UPDATED_ON}'`
-
-
+      puts `git commit -m'Version #{Stujo::Git::SGV_TAG},#{CURRENT_BRANCH},#{CURRENT_COMMIT},#{UPDATED_ON}'`
 
       puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{next_tag}'`
 
