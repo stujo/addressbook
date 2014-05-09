@@ -16,6 +16,6 @@
 /tmp
 rspec_results.txt
 
-/config/initializers/stujo_git_info.rb
+#/config/initializers/stujo_git_info.rb
 
 
