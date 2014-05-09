@@ -10,8 +10,7 @@
       <th>City</th>
       <th>State</th>
       <th>Zip</th>
-      <th>Contact</th>
-      <th colspan="2"></th>
+      <th>Actions</th>
     </tr>
     </thead>
 
@@ -28,7 +27,6 @@
           <td><%= address.city %></td>
           <td><%= address.state %></td>
           <td><%= address.zip %></td>
-          <td><%= link_to address.full_name, address.contact if address.contact %></td>
           <td><%= link_to 'Edit', edit_contact_address_path(@contact, address) %></td>
         </tr>
     <% end %>

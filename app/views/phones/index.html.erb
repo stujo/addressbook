@@ -7,8 +7,7 @@
     <tr>
       <th class="addressbook-type"></th>
       <th>Digits</th>
-      <th>Contact</th>
-      <th colspan="2"></th>
+      <th>Actions</th>
     </tr>
     </thead>
 
@@ -17,7 +16,6 @@
         <tr class="contact_type_<%= phone.phone_type %>">
           <td><%= contact_type_icon phone.phone_type %></td>
           <td><%= phone.digits %></td>
-          <td><%= link_to phone.full_name, phone.contact if phone.contact %></td>
           <td><%= link_to 'Edit', edit_contact_phone_path(@contact, phone) %></td>
         </tr>
     <% end %>
