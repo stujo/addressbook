@@ -6,7 +6,7 @@
         <% phones.each do |phone| %>
             <tr>
               <td><%= phone.digits %></td>
-              <td align="right"><%= link_to('Edit', edit_phone_path(phone)) %></td>
+              <td align="right"><%= link_to('Edit', edit_contact_phone_path(phone.contact, phone)) %></td>
             </tr>
         <% end %>
       </table>

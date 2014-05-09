@@ -1,33 +1,12 @@
-<%= form_for(@phone) do |f| %>
-    <% if @phone.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@phone.errors.count, "error") %> prohibited this phone from being saved:</h2>
-
-          <ul>
-            <% @phone.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :phone_type %>
-      <br>
-      <%= f.select :phone_type, phone_types_for_select(@phone), {}, class: "form-control" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :digits %>
-      <br>
-      <%= f.text_field :digits %>
-    </div>
-    <div class="field">
-      <%= f.label :contact_id %>
-      <br>
-      <%= f.select(:contact_id, contacts_for_select, { include_blank: true} , {class: "form-control"})  %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<%= simple_form_for([@contact,@phone],
+                    html: {class: 'form-horizontal'},
+                    wrapper: :horizontal_form,
+                    wrapper_mappings: {check_boxes: :horizontal_radio_and_checkboxes,
+                                       radio_buttons: :horizontal_radio_and_checkboxes,
+                                       file: :horizontal_file_input,
+                                       boolean: :horizontal_boolean}) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :digits, placeholder: 'Phone Number' %>
+    <%= contact_type_field f, @phone, :phone_type %>
+    <%= f.button :submit  %>
 <% end %>

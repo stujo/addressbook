@@ -36,13 +36,12 @@ if Object.const_get('Contact')
   digits = (1000..6000).to_a
   areas = [415, 510, 650]
 
-  first_names.each do |first_name|
+  first_names.each.with_index do |first_name, name_index|
     last_names.each do |last_name|
 
-      name_index = (0... first_names.length).to_a.sample
       gender = name_index < 4 ? Contact::GENDER_MALE : Contact::GENDER_FEMALE
 
-      contact = Contact.find_or_create_by!({first_name: first_names[name_index], last_name: last_name, gender: gender, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+      contact = Contact.find_or_create_by!({first_name: first_name, last_name: last_name, gender: gender, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
       (0..4).to_a.sample.times do
         add = {address_type: address_types.sample, street: "#{rnd_numbers.sample} #{streets.sample}", city: cities.sample, state: 'CA', zip: zips.sample, contact: contact};

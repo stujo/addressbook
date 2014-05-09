@@ -1,53 +1,17 @@
-<%= form_for(@address) do |f| %>
-    <% if @address.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
+<%= simple_form_for([@contact, @address],
+                    html: {class: 'form-horizontal'},
+                    wrapper: :horizontal_form,
+                    wrapper_mappings: {check_boxes: :horizontal_radio_and_checkboxes,
+                                       radio_buttons: :horizontal_radio_and_checkboxes,
+                                       file: :horizontal_file_input,
+                                       boolean: :horizontal_boolean}) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :street, placeholder: 'Number and Street' %>
+    <%= f.input :street_2, placeholder: 'Suite or Apt' %>
+    <%= f.input :city, placeholder: 'City' %>
+    <%= f.input :state, placeholder: 'State' %>
+    <%= f.input :zip, placeholder: 'Zipcode' %>
+    <%= contact_type_field f, @address, :address_type %>
+    <%= f.button :submit  %>
 
-          <ul>
-            <% @address.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :address_type %>
-      <br>
-      <%= f.select :address_type, address_types_for_select(@address), {}, class: "form-control" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :street %>
-      <br>
-      <%= f.text_field :street %>
-    </div>
-    <div class="field">
-      <%= f.label :street_2 %>
-      <br>
-      <%= f.text_field :street_2 %>
-    </div>
-    <div class="field">
-      <%= f.label :city %>
-      <br>
-      <%= f.text_field :city %>
-    </div>
-    <div class="field">
-      <%= f.label :state %>
-      <br>
-      <%= f.text_field :state %>
-    </div>
-    <div class="field">
-      <%= f.label :zip %>
-      <br>
-      <%= f.text_field :zip %>
-    </div>
-    <div class="field">
-      <%= f.label :contact_id %>
-      <br>
-      <%= f.select(:contact_id, contacts_for_select, {include_blank: true}, {class: "form-control"}) %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
 <% end %>

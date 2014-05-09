@@ -1,10 +1,10 @@
-class PhonesController < ApplicationController
+class PhonesController < BelongsToContactController
   before_action :set_phone, only: [:show, :edit, :update, :destroy]
 
   # GET /phones
   # GET /phones.json
   def index
-    @phones = prep_pagination Phone.all
+    @phones = prep_pagination @contact.phones
   end
 
 
@@ -15,7 +15,7 @@ class PhonesController < ApplicationController
 
   # GET /phones/new
   def new
-    @phone = Phone.new
+    @phone = @contact.phones.build
   end
 
   # GET /phones/1/edit
@@ -25,11 +25,11 @@ class PhonesController < ApplicationController
   # POST /phones
   # POST /phones.json
   def create
-    @phone = Phone.new(phone_params)
+    @phone = @contact.phones.build(phone_params)
 
     respond_to do |format|
       if @phone.save
-        format.html { redirect_to @phone, notice: 'Phone was successfully created.' }
+        format.html { redirect_to contact_phones_path(@contact), notice: 'Phone was successfully created.' }
         format.json { render :show, status: :created, location: @phone }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class PhonesController < ApplicationController
   def update
     respond_to do |format|
       if @phone.update(phone_params)
-        format.html { redirect_to @phone, notice: 'Phone was successfully updated.' }
+        format.html { redirect_to contact_phones_path(@contact), notice: 'Phone was successfully updated.' }
         format.json { render :show, status: :ok, location: @phone }
       else
         format.html { render :edit }
@@ -65,11 +65,11 @@ class PhonesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_phone
-    @phone = Phone.find(params[:id])
+    @phone = @contact.phones.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def phone_params
-    params.require(:phone).permit(:phone_type, :digits, :contact_id)
+    params.require(:phone).permit(:phone_type, :digits)
   end
 end

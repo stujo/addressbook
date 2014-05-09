@@ -13,7 +13,7 @@
                 <span class="zip"><%= address.zip %></span>
               </td>
               <td align="right">
-                <%= link_to('Edit', edit_address_path(address)) %>
+                <%= link_to('Edit', edit_contact_address_path(address.contact, address)) %>
               </td>
             </tr>
         <% end %>
