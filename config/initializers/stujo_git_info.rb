@@ -2,8 +2,8 @@ module Stujo
   module Git
     CURRENT_REMOTE = 'local'
     CURRENT_BRANCH = 'master'
-    CURRENT_COMMIT = 'b5f45a72e3087654d438ff0018ca2d6ada198917'
-    UPDATED_ON = '2014-05-09 16:34:00 -0700'
-    SGV_TAG = 'sgv22'
+    CURRENT_COMMIT = '1880fedecf79d3fd8ead507c28ff88e349e668cd'
+    UPDATED_ON = '2014-05-09 16:34:10 -0700'
+    SGV_TAG = 'sgv23'
   end
 end
