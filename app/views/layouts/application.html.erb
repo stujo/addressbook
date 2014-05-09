@@ -66,8 +66,8 @@
 
   <%= yield %>
 
-  <% if @pagintation_scopes %>
-      <div class="addressbook-debugging panel panel-default">
+  <div class="addressbook-debugging panel panel-default">
+    <% if @pagintation_scopes %>
         <div class="panel-heading">Debugging SQL</div>
         <div class="panel-panel">
           <% @pagintation_scopes.each do |scope| %>
@@ -77,8 +77,26 @@
           <% end %>
 
         </div>
-      </div>
-  <% end %>
+    <% end %>
+    <div class="panel-heading">Verison Info</div>
+    <div class="panel-panel">
+      <table class="table">
+        <tr>
+          <td>Branch</td>
+          <td><%= Stujo::Git.current_branch %></td>
+        </tr>
+        <tr>
+          <td>Commit</td>
+          <td><%= Stujo::Git.current_commit %></td>
+        </tr>
+        <tr>
+          <td>Updated</td>
+          <td><%= Stujo::Git.updated_on %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 </div>
 </body>
 </html>
