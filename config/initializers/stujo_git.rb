@@ -1,25 +1,14 @@
-
 module Stujo
   module Git
-    def self.current_branch
-      if defined? Stujo::Git::CURRENT_BRANCH
-        Stujo::Git::CURRENT_BRANCH
+    def self.method_missing(m, *args, &block)
+      raw = "raw_#{m}".to_sym
+
+      puts "Checking for #{raw}"
+
+      if self.respond_to? raw
+        self.send raw # no args or block
       else
-        'unknown'
-      end
-    end
-    def self.current_commit
-      if defined? Stujo::Git::CURRENT_COMMIT
-        Stujo::Git::CURRENT_COMMIT
-      else
-        'unknown'
-      end
-    end
-    def self.updated_on
-      if defined? Stujo::Git::UPDATED_ON
-        Stujo::Git::UPDATED_ON
-      else
-        'unknown'
+        '_unknown_'
       end
     end
   end
