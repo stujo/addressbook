@@ -3,4 +3,4 @@ README
 
 This sample app demonstrates Form objects and ActiveRecord::Relations
 
-It specifically does not use nested resources at this time because this topic has not been taught yet
+[!CodeShip](https://www.codeship.io/projects/b2e134d0-b9c1-0131-5ab2-4202456fde48/status)

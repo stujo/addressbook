@@ -42,9 +42,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Contacts', contacts_path %></li>
-        <li><%= link_to 'Addresses', addresses_path %></li>
-        <li><%= link_to 'Phone Numbers', phones_path %></li>
+        <li><%= link_to 'Add Contact', new_contact_path %></li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->
@@ -54,6 +52,18 @@
 
 
 <div class="container">
+  <% if @contact && @contact.persisted? %>
+      <div class="page-header">
+        <h1><%= @contact.full_name %></h1>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="<%= 'active' if current_page?(edit_contact_path @contact) %>"><%= link_to "Edit", edit_contact_path(@contact) %></li>
+        <li class="<%= 'active' if current_page?(contact_addresses_path(@contact)) %>"><%= link_to "Addresses", contact_addresses_path(@contact) %></li>
+        <li class="<%= 'active' if current_page?(contact_phones_path(@contact)) %>"><%= link_to "Phone Numbers", contact_phones_path(@contact) %></li>
+      </ul>
+  <% end %>
+
+
   <%= yield %>
 
   <% if @pagintation_scopes %>

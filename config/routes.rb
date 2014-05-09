@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   root to: 'contacts#index'
 
-  resources :addresses
-
-  resources :phones
 
   resources :contacts do
+    resources :addresses
+    resources :phones
+
     collection do
       get 'over50s'
       get 'males'

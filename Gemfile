@@ -48,3 +48,4 @@ gem 'kaminari'
 
 gem 'quiet_assets'
 
+gem 'simple_form', '~> 3.1.0.rc1'

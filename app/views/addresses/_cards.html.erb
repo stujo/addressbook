@@ -4,6 +4,7 @@
       <table class="table table-striped">
         <% addresses.each do |address| %>
             <tr>
+              <td><%= contact_type_icon address.address_type %></td>
               <td>
                 <span class="street"><%= address.street %></span>
                 <span class="street_2"><%= address.street_2 %></span>
@@ -13,7 +14,7 @@
                 <span class="zip"><%= address.zip %></span>
               </td>
               <td align="right">
-                <%= link_to('Edit', edit_address_path(address)) %>
+                <%= link_to('Edit', edit_contact_address_path(address.contact, address)) %>
               </td>
             </tr>
         <% end %>

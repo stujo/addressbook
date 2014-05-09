@@ -12,9 +12,19 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
 
 
 .addressbook-debugging{
   margin-top: 20px;
 }
+
+.addressbook-commands{
+    margin: 9px;
+}
+
+th.addressbook-type
+{
+    width: 20px;
+}
+

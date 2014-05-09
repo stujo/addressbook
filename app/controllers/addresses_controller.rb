@@ -1,10 +1,10 @@
-class AddressesController < ApplicationController
+class AddressesController < BelongsToContactController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = prep_pagination Address.all
+    @addresses = prep_pagination @contact.addresses
   end
 
   # GET /addresses/1
@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses/new
   def new
-    @address = Address.new
+    @address = @contact.addresses.build
   end
 
   # GET /addresses/1/edit
@@ -24,11 +24,11 @@ class AddressesController < ApplicationController
   # POST /addresses
   # POST /addresses.json
   def create
-    @address = Address.new(address_params)
+    @address = @contact.addresses.build(address_params)
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
+        format.html { redirect_to contact_addresses_path(@contact), notice: 'Address was successfully created.' }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
+        format.html { redirect_to contact_addresses_path(@contact), notice: 'Address was successfully updated.' }
         format.json { render :show, status: :ok, location: @address }
       else
         format.html { render :edit }
@@ -64,11 +64,11 @@ class AddressesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_address
-    @address = Address.find(params[:id])
+    @address = @contact.addresses.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def address_params
-    params.require(:address).permit(:address_type, :street, :street_2, :city, :state, :zip, :contact_id)
+    params.require(:address).permit(:address_type, :street, :street_2, :city, :state, :zip)
   end
 end

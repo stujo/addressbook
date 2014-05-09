@@ -1,32 +1,15 @@
-<%= form_for(@contact) do |f| %>
-    <% if @contact.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+<%= simple_form_for(@contact,
+                    html: {class: 'form-horizontal'},
+                    wrapper: :horizontal_form,
+                    wrapper_mappings: {check_boxes: :horizontal_radio_and_checkboxes,
+                                       radio_buttons: :horizontal_radio_and_checkboxes,
+                                       file: :horizontal_file_input,
+                                       boolean: :horizontal_boolean}) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :first_name, placeholder: 'First Name' %>
+    <%= f.input :last_name, placeholder: 'Last Name' %>
+    <%= f.input :dob,:as => :string  %>
+    <%= f.input :gender, label: 'Gender', collection: [ [Contact::GENDER_MALE, 'Male' ], [Contact::GENDER_FEMALE, 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @contact.gender, item_wrapper_class: 'inline' %>
+    <%= f.button :submit  %>
 
-          <ul>
-            <% @contact.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :first_name %>
-      <br>
-      <%= f.text_field :first_name %>
-    </div>
-    <div class="field">
-      <%= f.label :last_name %>
-      <br>
-      <%= f.text_field :last_name %>
-    </div>
-    <div class="field">
-      <%= f.label :dob %>
-      <br>
-      <%= f.date_select :dob, start_year: 1900 %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
 <% end %>
