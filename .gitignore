@@ -14,3 +14,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+rspec_results.txt
+
+/config/initializers/stujo_git_info.rb
+
+
