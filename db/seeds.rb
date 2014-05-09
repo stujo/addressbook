@@ -23,12 +23,12 @@ if Object.const_get('Contact')
   cities = ['San Francisco', 'San Jose', 'Emeryville']
   streets = ['Main St', 'Market St', 'Harbor St', 'West St']
 
-  address_types = [:is_office, :is_home, :is_other]
+  address_types = ["0", "1", "2"]
 
   first_names = ['Alan', 'Peter', 'Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
   last_names = ['Jones', 'Smith', 'Williams', 'Evans', 'Tilly', 'Thompson', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
 
-  birth_years = (1900..2000).to_a
+  birth_years = (1950..2000).to_a
   birth_months = (1..12).to_a
   birth_days = (1..28).to_a
 
@@ -36,13 +36,12 @@ if Object.const_get('Contact')
   digits = (1000..6000).to_a
   areas = [415, 510, 650]
 
-  first_names.each do |first_name|
+  first_names.each.with_index do |first_name, name_index|
     last_names.each do |last_name|
 
-      name_index = (0... first_names.length).to_a.sample
       gender = name_index < 4 ? Contact::GENDER_MALE : Contact::GENDER_FEMALE
 
-      contact = Contact.find_or_create_by!({first_name: first_names[name_index], last_name: last_name, gender: gender, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
+      contact = Contact.find_or_create_by!({first_name: first_name, last_name: last_name, gender: gender, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
       (0..4).to_a.sample.times do
         add = {address_type: address_types.sample, street: "#{rnd_numbers.sample} #{streets.sample}", city: cities.sample, state: 'CA', zip: zips.sample, contact: contact};
@@ -65,16 +64,16 @@ if Object.const_get('Contact')
   john = seeder Contact, :first_name, {first_name: 'John', gender: Contact::GENDER_MALE, last_name: 'Hammer', dob: Date.parse('1989-02-03')}
   karla = seeder Contact, :first_name, {first_name: 'Karla', gender: Contact::GENDER_FEMALE, last_name: 'Tillen', dob: Date.parse('1991-02-19')}
 
-  Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 104', city: 'San Francisco', state: 'CA', zip: '94012', contact: bob})
-  Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 101', city: 'San Francisco', state: 'CA', zip: '94012', contact: jane})
-  Address.find_or_create_by!({address_type: :is_office, street: '100 Main', street_2: 'Suite 207', city: 'San Francisco', state: 'CA', zip: '94012', contact: walter})
-  Address.find_or_create_by!({address_type: :is_other, street: '999 West', street_2: '#5', city: 'San Francisco', state: 'CA', zip: '94102', contact: walter})
-  Address.find_or_create_by!({address_type: :is_home, street: '123 Appleton St', city: 'Boston', state: 'MA', zip: '02116', contact: paula})
-  Phone.find_or_create_by!({phone_type: :is_office, digits: '(415) 555-7422', contact: bob})
-  Phone.find_or_create_by!({phone_type: :is_office, digits: '(415) 555-9311', contact: jane})
-  Phone.find_or_create_by!({phone_type: :is_office, digits: '(415) 555-6387', contact: walter})
-  Phone.find_or_create_by!({phone_type: :is_other, digits: '(707) 555-1412', contact: walter})
-  Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-6335', contact: paula})
+  Address.find_or_create_by!({address_type: "0", street: '100 Main', street_2: 'Suite 104', city: 'San Francisco', state: 'CA', zip: '94012', contact: bob})
+  Address.find_or_create_by!({address_type: "0", street: '100 Main', street_2: 'Suite 101', city: 'San Francisco', state: 'CA', zip: '94012', contact: jane})
+  Address.find_or_create_by!({address_type: "0", street: '100 Main', street_2: 'Suite 207', city: 'San Francisco', state: 'CA', zip: '94012', contact: walter})
+  Address.find_or_create_by!({address_type: "2", street: '999 West', street_2: '#5', city: 'San Francisco', state: 'CA', zip: '94102', contact: walter})
+  Address.find_or_create_by!({address_type: "1", street: '123 Appleton St', city: 'Boston', state: 'MA', zip: '02116', contact: paula})
+  Phone.find_or_create_by!({phone_type: "0", digits: '(415) 555-7422', contact: bob})
+  Phone.find_or_create_by!({phone_type: "0", digits: '(415) 555-9311', contact: jane})
+  Phone.find_or_create_by!({phone_type: "0", digits: '(415) 555-6387', contact: walter})
+  Phone.find_or_create_by!({phone_type: "2", digits: '(707) 555-1412', contact: walter})
+  Phone.find_or_create_by!({phone_type: "1", digits: '(123) 555-6335', contact: paula})
 
 
   billy_phone_only = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Phone Only', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
@@ -82,15 +81,15 @@ if Object.const_get('Contact')
   billy_both = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'Both', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
   billy_none = Contact.find_or_create_by!({first_name: 'Billy', last_name: 'None', gender: Contact::GENDER_MALE, dob: Date.parse("#{birth_years.sample}-#{birth_months.sample}-#{birth_days.sample}")})
 
-  Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-7777', contact: billy_phone_only})
+  Phone.find_or_create_by!({phone_type: "1", digits: '(123) 555-7777', contact: billy_phone_only})
 
-  Phone.find_or_create_by!({phone_type: :is_home, digits: '(123) 555-8888', contact: billy_both})
+  Phone.find_or_create_by!({phone_type: "1", digits: '(123) 555-8888', contact: billy_both})
 
-  Address.find_or_create_by!({address_type: :is_other, street: '1000 East', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_address_only})
+  Address.find_or_create_by!({address_type: "2", street: '1000 East', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_address_only})
 
-  Address.find_or_create_by!({address_type: :is_other, street: '414 South', city: 'Boston', state: 'MA', zip: '02123', contact: billy_address_only})
+  Address.find_or_create_by!({address_type: "2", street: '414 South', city: 'Boston', state: 'MA', zip: '02123', contact: billy_address_only})
 
-  Address.find_or_create_by!({address_type: :is_other, street: '1000 North', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_both})
+  Address.find_or_create_by!({address_type: "2", street: '1000 North', city: 'San Francisco', state: 'CA', zip: '94102', contact: billy_both})
 
 
 end

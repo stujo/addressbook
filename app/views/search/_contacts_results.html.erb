@@ -9,11 +9,7 @@
       <% contacts.each do |contact| %>
           <div class="contact <%= contact_card_class contact %>">
             <div class="caption">
-              <div class="pull-right">
-                <%= link_to('Show', contact_path(contact), {class: 'btn btn-default'}) %>
-                <%= link_to('Edit', edit_contact_path(contact), {class: 'btn btn-default'}) %>
-              </div>
-              <h3><%= link_to contact.full_name, contact %></h3>
+              <h3><%= link_to contact.full_name, edit_contact_path(contact) %></h3>
             </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">

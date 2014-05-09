@@ -14,18 +14,15 @@
       <th>Name</th>
       <th>Gender</th>
       <th>Date of Birth</th>
-      <th colspan="2"></th>
     </tr>
     </thead>
 
     <tbody>
     <% contacts.each do |contact| %>
         <tr class="<%= contact_card_class contact %>">
-          <td><%= contact.full_name %></td>
+          <td><%= link_to contact.full_name, edit_contact_path(contact) %></td>
           <td><%= contact_gender_display contact %></td>
-          <td><%= contact.dob %> <br/>(<%= distance_of_time_in_words_to_now contact.dob %> ago)</td>
-          <td><%= link_to 'Show', contact %></td>
-          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+          <td><%= contact.dob %> (<%= distance_of_time_in_words_to_now contact.dob if contact.dob%> ago)</td>
         </tr>
     <% end %>
     </tbody>

@@ -6,7 +6,8 @@ class Contact < ActiveRecord::Base
   scope :males, ->{ where(gender: GENDER_MALE ) }
   scope :females, ->{ where(gender: GENDER_FEMALE ) }
 
-  validates :gender, inclusion: { in: [GENDER_MALE, GENDER_FEMALE] }
+  validates_inclusion_of :gender, in: [nil, GENDER_MALE, GENDER_FEMALE], message: 'Please select either Male or Female'
+  validates_presence_of :first_name, message: 'Please enter a name'
 
   has_many :addresses
   has_many :phones

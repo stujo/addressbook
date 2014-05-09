@@ -5,8 +5,9 @@
       <table class="table table-striped">
         <% phones.each do |phone| %>
             <tr>
+              <td><%= contact_type_icon phone.phone_type %></td>
               <td><%= phone.digits %></td>
-              <td align="right"><%= link_to('Edit', edit_phone_path(phone)) %></td>
+              <td align="right"><%= link_to('Edit', edit_contact_phone_path(phone.contact, phone)) %></td>
             </tr>
         <% end %>
       </table>
