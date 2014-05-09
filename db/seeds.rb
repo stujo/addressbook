@@ -23,7 +23,7 @@ if Object.const_get('Contact')
   cities = ['San Francisco', 'San Jose', 'Emeryville']
   streets = ['Main St', 'Market St', 'Harbor St', 'West St']
 
-  address_types = [:is_office, :is_home, :is_other]
+  address_types = ["0", "1", "2"]
 
   first_names = ['Alan', 'Peter', 'Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
   last_names = ['Jones', 'Smith', 'Williams', 'Evans', 'Tilly', 'Thompson', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
