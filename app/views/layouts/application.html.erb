@@ -91,7 +91,15 @@
         </tr>
         <tr>
           <td>Updated</td>
-          <td><%= Stujo::Git.updated_on %></td>
+          <td><%= Stujo::Git.current_update %></td>
+        </tr>
+        <tr>
+          <td>Remote</td>
+          <td><%= Stujo::Git.current_remote %></td>
+        </tr>
+        <tr>
+          <td>Tag</td>
+          <td><%= Stujo::Git.current_tag %></td>
         </tr>
       </table>
     </div>
