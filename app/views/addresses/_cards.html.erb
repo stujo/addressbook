@@ -4,6 +4,7 @@
       <table class="table table-striped">
         <% addresses.each do |address| %>
             <tr>
+              <td><%= contact_type_icon address.address_type %></td>
               <td>
                 <span class="street"><%= address.street %></span>
                 <span class="street_2"><%= address.street_2 %></span>

@@ -4,17 +4,6 @@
 
 
 <%= form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
-    <% if @advanced_search_form.errors.any? %>
-        <div id="error_explanation">
-          <ul>
-            <% @advanced_search_form.errors.each do |field, message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-
     <div class="form-group">
       <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
       <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>

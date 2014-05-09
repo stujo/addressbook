@@ -28,7 +28,7 @@ if Object.const_get('Contact')
   first_names = ['Alan', 'Peter', 'Bob', 'John', 'Jane', 'Sarah', 'Sally', 'Julie', 'Catheine', 'Rebecca', 'Heather', 'Kat', 'Mary', 'Paula', 'Dana', 'Karla', 'Minnie', 'Marge']
   last_names = ['Jones', 'Smith', 'Williams', 'Evans', 'Tilly', 'Thompson', 'McDonald', 'White', 'Milford', 'Johnson', 'Green', 'Black', 'Simpson', 'Riley']
 
-  birth_years = (1900..2000).to_a
+  birth_years = (1950..2000).to_a
   birth_months = (1..12).to_a
   birth_days = (1..28).to_a
 

@@ -5,10 +5,23 @@ class AdvancedSearchForm
 
   attr_accessor :preload_addresses, :preload_phones
 
+
+  validates_format_of :zip,
+                      :with => %r{\d{5}(-\d{4})?},
+                      :message => "should be 12345 or 12345-1234",
+                      :allow_blank => true
+
   def persisted?
     false
   end
 
+
+  def get_contacts
+    scope = Contact.all.uniq
+    add_scope_filters scope
+  end
+
+  private
   def first_name_scope scope
     if self.first_name.blank?
       scope
@@ -38,7 +51,7 @@ class AdvancedSearchForm
     if self.phone.blank?
       scope
     else
-      scope.joins(:phones).where("phones.digits LIKE :phone_like_match", {phone_like_match: "%#{self.phone}%" })
+      scope.joins(:phones).where("phones.digits LIKE :phone_like_match", {phone_like_match: "%#{self.phone}%"})
     end
   end
 
@@ -59,9 +72,8 @@ class AdvancedSearchForm
     end
   end
 
-  def get_contacts
 
-    scope = Contact.all.uniq
+  def add_scope_filters scope
 
     # Add Each Scope
     # Each of these methods just returns the original scope if
@@ -69,8 +81,13 @@ class AdvancedSearchForm
     scope = first_name_scope(scope)
     scope = last_name_scope(scope)
     scope = zip_scope(scope)
+    scope = phone_scope(scope)
     scope = sorting_scope(scope)
 
+    include_pre_loads scope
+  end
+
+  def include_pre_loads scope
     #Pre load associations if instructed
     if @preload_addresses
       scope = scope.includes(:addresses);
@@ -78,7 +95,6 @@ class AdvancedSearchForm
     if @preload_phones
       scope = scope.includes(:phones);
     end
-
     scope
   end
 
