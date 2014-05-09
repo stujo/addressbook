@@ -5,10 +5,26 @@ class AdvancedSearchForm
 
   attr_accessor :preload_addresses, :preload_phones
 
+  validates_length_of :first_name,
+                      :minimum => 2,
+                      :message => "at least 2 letters",
+                      :allow_blank => true
+
+
+  validates_length_of :last_name,
+                      :minimum => 2,
+                      :message => "at least 2 letters",
+                      :allow_blank => true
+
+  validates_length_of :phone,
+                      :minimum => 3,
+                      :message => "at least 3 numbers",
+                      :allow_blank => true
+
 
   validates_format_of :zip,
                       :with => %r{\d{5}(-\d{4})?},
-                      :message => "should be 12345 or 12345-1234",
+                      :message => "should be 5 digits",
                       :allow_blank => true
 
   def persisted?
@@ -26,7 +42,7 @@ class AdvancedSearchForm
     if self.first_name.blank?
       scope
     else
-      scope.where(first_name: self.first_name)
+      scope.where("first_name LIKE :first_name_like_match", {first_name_like_match: "%#{self.first_name}%"})
     end
   end
 
@@ -34,7 +50,7 @@ class AdvancedSearchForm
     if self.last_name.blank?
       scope
     else
-      scope.where(last_name: self.last_name)
+      scope.where("last_name LIKE :last_name_like_match", {last_name_like_match: "%#{self.last_name}%"})
     end
   end
 

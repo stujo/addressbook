@@ -2,18 +2,17 @@
   <h1>Advanced Contacts Search</h1>
 </div>
 
+<%= simple_form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false,
+                    html: {class: 'form-inline addressbook-inline'},
+                    wrapper: :inline_form,
+                    wrapper_mappings: {}) do |f| %>
 
-<%= form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false, html: {class: "form-inline addressbook-inline"}) do |f| %>
-    <div class="form-group">
-      <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
-      <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
-      <%= f.text_field :zip, class: 'form-control', placeholder: 'Zipcode' %>
-      <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone' %>
-      <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
-    </div>
-    <div class="form-group">
-      <%= f.button 'Search', class: 'btn btn-primary' %>
-    </div>
+    <%= f.input :first_name, class: 'form-control', placeholder: 'First Name', label: false %>
+    <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: false %>
+    <%= f.input :zip, class: 'form-control', placeholder: 'Zipcode', label: false %>
+    <%= f.input :phone, class: 'form-control', placeholder: 'Phone', label: false %>
+    <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
+    <%= f.button :submit, 'Search'  %>
 <% end %>
 
 <%= render partial: 'contacts_results', locals: {contacts: @contacts} %>
