@@ -10,21 +10,16 @@ namespace :stujo do
     def tag_info_lookup
       latest_tag = `git describe --abbrev=0 --tags`
       next_tag = Time.now.to_i.to_s
+      match = latest_tag[/#{TAG_PREFIX}(.*)/, 1]
 
       {
-          full: "#{TAG_PREFIX}{#{next_tag}",
+          full: "#{TAG_PREFIX}#{next_tag}",
           next: next_tag,
           latest: latest_tag
       }
     end
 
-
-    desc "Tag Current Branch"
-    task :pre_commit, [:remote, :url] => :environment do |t, args|
-
-    end
-
-    desc "Tag Current Branch"
+    desc "Update Version Tag In Current Branch"
     task :tag, [:remote, :url] => :environment do |t, args|
 
       tag_info = tag_info_lookup
@@ -32,16 +27,7 @@ namespace :stujo do
       CURRENT_REMOTE = 'local'
       CURRENT_REMOTE = "#{args[:remote]}" if args.has_key? :remote
 
-      #
-      # latest_tag = `git describe --abbrev=0 --tags`
-      # next_tag = 1
-      # match = latest_tag[/sgv(.*)/, 1]
-      # next_tag = 1 + match.to_i unless match.blank?
-      # SGV_TAG = "sgv#{next_tag}"
-      #
-
       puts "Next Auto Tag: #{tag_info[:full]}"
-
 
       rb_file = Rails.root.join('config/initializers/', "stujo_git_info.rb")
       puts "Info File: #{rb_file}"
@@ -94,7 +80,7 @@ end
       puts `git add #{rb_file}`
       puts `git commit --amend --no-edit`
 
-      puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{tag_info[:full]}'`
+      #puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{tag_info[:full]}'`
 
     end
   end
