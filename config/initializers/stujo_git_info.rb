@@ -7,13 +7,13 @@ module Stujo
       'master'
     end
     def self.raw_current_commit
-      '5d598b344a4c7c501bd561e7b8a8d5697c0f559c'
+      '125187fb72e47fa73171a4aa84593f97108e1a68'
     end
     def self.raw_current_update
-      '2014-05-09 23:15:17 -0700'
+      '2014-05-09 23:18:24 -0700'
     end
     def self.raw_current_tag
-      'sgv{1399702517'
+      'sgv{1399702704'
     end
   end
 end
