@@ -19,6 +19,7 @@ namespace :stujo do
       }
     end
 
+    
     desc "Update Version Tag In Current Branch"
     task :tag, [:remote, :url] => :environment do |t, args|
 
