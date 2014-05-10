@@ -1,19 +1,16 @@
 module Stujo
   module Git
-    def self.raw_current_remote
-      ''
-    end
     def self.raw_current_branch
       'master'
     end
     def self.raw_current_commit
-      '9fee1ea89eb8fd5bc5215052e2df3ec61d5ed970'
+      'd67f564746c89fdb82b4ed3a362774ad436ca099'
     end
     def self.raw_current_update
-      '2014-05-09 23:30:04 -0700'
+      '2014-05-09 23:32:16 -0700'
     end
     def self.raw_current_tag
-      'sgv1399703404'
+      'sgv1399703536'
     end
   end
 end

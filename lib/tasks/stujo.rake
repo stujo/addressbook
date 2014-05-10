@@ -25,9 +25,6 @@ namespace :stujo do
 
       tag_info = tag_info_lookup
 
-      CURRENT_REMOTE = 'local'
-      CURRENT_REMOTE = "#{args[:remote]}" if args.has_key? :remote
-
       puts "Next Auto Tag: #{tag_info[:full]}"
 
       rb_file = Rails.root.join('config/initializers/', "stujo_git_info.rb")
@@ -36,9 +33,6 @@ namespace :stujo do
       template = <<-eos
 module Stujo
   module Git
-    def self.raw_current_remote
-      '<%= CURRENT_REMOTE %>'
-    end
     def self.raw_current_branch
       '<%= CURRENT_BRANCH %>'
     end
@@ -59,8 +53,6 @@ end
       UPDATED_ON = Time.now
       SGV_TAG = tag_info[:full]
 
-      puts "Git State : #{SGV_TAG},#{CURRENT_REMOTE},#{CURRENT_BRANCH},#{CURRENT_COMMIT},#{UPDATED_ON}"
-
       renderer = ERB.new(template)
       output = renderer.result()
 
@@ -74,16 +66,10 @@ end
 
       load rb_file
 
-      info = "#{Stujo::Git.current_tag},#{Stujo::Git.current_remote},#{Stujo::Git.current_branch},#{Stujo::Git.current_commit},#{Stujo::Git.current_update}"
+      info = "#{Stujo::Git.current_tag},#{Stujo::Git.current_branch},#{Stujo::Git.current_commit},#{Stujo::Git.current_update}"
 
-      puts "Git Update: #{info}"
-
+      puts "Version: #{info}"
       puts `git add #{rb_file}`
-
-      #puts `git commit --amend --no-edit`
-
-      #puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{tag_info[:full]}'`
-
     end
   end
 end
