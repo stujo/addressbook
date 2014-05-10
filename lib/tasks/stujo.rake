@@ -62,7 +62,7 @@ end
 
       load rb_file
 
-      info = "#{Stujo::Git.current_tag},#{Stujo::Git.current_branch},#{Stujo::Git.current_commit},#{Stujo::Git.current_update}"
+      info = "#{Stujo::Git.current_tag},#{Stujo::Git.current_remote},#{Stujo::Git.current_branch},#{Stujo::Git.current_commit},#{Stujo::Git.current_update}"
 
       puts "Git Update: #{info}"
 
