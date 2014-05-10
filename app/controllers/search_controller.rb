@@ -24,7 +24,7 @@ class SearchController < ApplicationController
 
   def ransack
     @search = Contact.search(params[:q])
-    @contacts = prep_pagination @search.result
+    @contacts = prep_pagination(@search.result, 10)
     @search.build_condition
   end
 
