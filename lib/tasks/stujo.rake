@@ -5,18 +5,51 @@ namespace :stujo do
   desc "Git"
   namespace :git do
 
+    TAG_PREFIX = 'sgv'
+
+    def tag_info_lookup
+      latest_tag = `git describe --abbrev=0 --tags`
+      next_tag = 1
+      match = latest_tag[/sgv(.*)/, 1]
+
+      if match.blank?
+
+      else
+        next_tag = (1 + match.to_i) + "." + Time.now.to_i
+      end
+
+
+
+      {
+          full: "#{TAG_PREFIX}{#{next_tag}",
+          next: next_tag,
+          latest: latest_tag
+      }
+    end
+
+
+    desc "Tag Current Branch"
+    task :pre_commit, [:remote, :url] => :environment do |t, args|
+
+    end
+
     desc "Tag Current Branch"
     task :tag, [:remote, :url] => :environment do |t, args|
+
+      tag_info = tag_info_lookup
 
       CURRENT_REMOTE = 'local'
       CURRENT_REMOTE = "#{args[:remote]}" if args.has_key? :remote
 
-      latest_tag = `git describe --abbrev=0 --tags`
-      next_tag = 1
-      match = latest_tag[/sgv(.*)/, 1]
-      next_tag = 1 + match.to_i unless match.blank?
-      SGV_TAG = "sgv#{next_tag}"
-      puts "Next Auto Tag: #{SGV_TAG}"
+      #
+      # latest_tag = `git describe --abbrev=0 --tags`
+      # next_tag = 1
+      # match = latest_tag[/sgv(.*)/, 1]
+      # next_tag = 1 + match.to_i unless match.blank?
+      # SGV_TAG = "sgv#{next_tag}"
+      #
+
+      puts "Next Auto Tag: #{tag_info[:full]}"
 
 
       rb_file = Rails.root.join('config/initializers/', "stujo_git_info.rb")

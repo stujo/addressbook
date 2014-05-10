@@ -1,9 +1,9 @@
 <div class="page-header">
-  <h1>Advanced Contacts Search</h1>
+  <h1>Advanced <span class="hidden-xs">Contacts</span> Search</h1>
 </div>
 
 <%= simple_form_for(@advanced_search_form, url: search_advanced_contacts_path, as: :advanced, method: :get, authenticity_token: false,
-                    html: {class: 'form-inline addressbook-inline'},
+                    html: {class: 'form-inline addressbook-inline clearfix'},
                     wrapper: :inline_form,
                     wrapper_mappings: {}) do |f| %>
 
@@ -11,8 +11,12 @@
     <%= f.input :last_name, class: 'form-control', placeholder: 'Last Name', label: false %>
     <%= f.input :zip, class: 'form-control', placeholder: 'Zipcode', label: false %>
     <%= f.input :phone, class: 'form-control', placeholder: 'Phone', label: false %>
-    <%= f.select(:sorting, {'Sort By...' => '', 'Oldest First' => 'oldest', 'Youngest First' => 'youngest'}, {include_blank: false}, {class: "form-control"}) %>
-    <%= f.button :submit, 'Search'  %>
+    <%= f.input :sorting, collection: {'Sort By...' => '', 'Oldest' => 'oldest', 'Youngest' => 'youngest'}, class: "form-control", include_blank: false, label: false %>
+    <div class="form-group col-xs-12 col-sm-2 col-md-2">
+      <%= f.button :button, class: 'form-control' do %>
+          <i class="glyphicon glyphicon-search"></i>
+      <% end %>
+    </div>
 <% end %>
 
 <%= render partial: 'contacts_results', locals: {contacts: @contacts} %>

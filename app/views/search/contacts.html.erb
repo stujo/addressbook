@@ -1,9 +1,11 @@
 <div class="page-header">
-  <h1>Search Results for <i><%= @search_form.q %></i></h1>
+  <h1><span class="hidden-xs">Search</span> Results for <i><%= @search_form.q %></i></h1>
 </div>
 
 <div class="well">
-  <%= link_to 'Need More Tools? - Try Our Advanced Search', search_advanced_contacts_path %>
+  <%= link_to search_advanced_contacts_path do %>
+      <span class="hidden-xs">Need More Tools? - </span>Try Our Advanced Search
+  <% end %>
 </div>
 
 <%= render partial: 'contacts_results', locals: {contacts: @contacts} %>

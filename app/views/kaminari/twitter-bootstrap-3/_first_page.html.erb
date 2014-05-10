@@ -7,5 +7,8 @@
     remote:        data-remote
 -%>
 <li class="first <%= 'disabled' if current_page.first? %>">
-  <%= link_to raw(t 'views.pagination.first'), (current_page.first? ? '#' : url), :remote => remote %>
+  <%= link_to (current_page.first? ? '#' : url), :remote => remote do %>
+      <%= raw(t 'views.pagination.first') %>
+      <span class="hidden-xs">First</span>
+  <% end %>
 </li>

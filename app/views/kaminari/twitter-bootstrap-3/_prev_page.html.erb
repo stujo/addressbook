@@ -6,6 +6,9 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="prev <%= 'disabled' if current_page.first? %>">
-  <%= link_to raw(t 'views.pagination.previous'), (current_page.first? ? '#' : url), :rel => 'prev', :remote => remote %>
+<li class="prev hidden-xs<%= ' disabled' if current_page.first? %>">
+  <%= link_to (current_page.first? ? '#' : url), :rel => 'prev', :remote => remote do %>
+      <%= raw(t 'views.pagination.previous') %>
+      <span class="hidden-xs">Prev</span>
+  <% end %>
 </li>

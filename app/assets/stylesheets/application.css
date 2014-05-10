@@ -28,3 +28,21 @@ th.addressbook-type
     width: 20px;
 }
 
+.addressbook-pagination
+{
+    text-align: center;
+}
+
+@media(max-width:767px) {
+    form.form-inline input.addressbook-narrower {
+        width: 100%;
+    }
+}
+@media(min-width:768px){
+    form.form-inline input.addressbook-narrower {
+        width: 100%;
+    }
+
+}
+@media(min-width:992px){}
+@media(min-width:1200px){}
