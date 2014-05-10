@@ -92,7 +92,7 @@ end
       puts "Git Update: #{info}"
 
       puts `git add #{rb_file}`
-      puts `git commit -m'Version #{info}'`
+      puts `git commit --amend --no-edit`
 
       puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{tag_info[:full]}'`
 
