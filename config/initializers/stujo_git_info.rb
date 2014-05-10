@@ -4,7 +4,7 @@ module Stujo
       'master'
     end
     def self.raw_current_timestamp
-      1399741251
+      1399744780
     end
   end
 end
