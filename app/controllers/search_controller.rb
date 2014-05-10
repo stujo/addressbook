@@ -22,6 +22,12 @@ class SearchController < ApplicationController
     end
   end
 
+  def ransack
+    @search = Contact.search(params[:q])
+    @contacts = prep_pagination @search.result
+    @search.build_condition
+  end
+
   private
   def advanced_search_params
     if (params.has_key? :advanced)

@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>Ransack <span class="hidden-xs">Search</span></h1>
+</div>
+
+<%= search_form_for @search, url: search_ransack_contacts_path do |f| %>
+    <%= f.condition_fields do |c| %>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <%= c.attribute_fields do |a| %>
+                <%= a.attribute_select({associations: [:addresses,:phones]}, {:class => 'form-control'}) %>
+            <% end %>
+          </div>
+          <div class="form-group col-sm-4">
+            <%= c.predicate_select({}, {:class => 'form-control'}) %>
+          </div>
+          <div class="form-group col-sm-4">
+            <%= c.value_fields do |v| %>
+                <%= v.text_field :value, :class => "form-control input-medium search-field" %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.submit "Search", class: 'btn btn-default' %>
+    </div>
+<% end %>
+
+<div>
+  <%= paginate @contacts, :theme => 'twitter-bootstrap-3' %>
+</div>
+
+<table class="table">
+  <tr>
+    <th><%= sort_link(@search, :first_name, "First Name") %></th>
+    <th><%= sort_link(@search, :last_name, "First Name") %></th>
+    <th><%= sort_link(@search, :dob, "Birth Date") %></th>
+  </tr>
+  <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.first_name %></td>
+        <td><%= contact.last_name %></td>
+        <td><%= contact.dob %></td>
+      </tr>
+  <% end %>
+</table>
