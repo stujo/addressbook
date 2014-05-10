@@ -85,16 +85,8 @@
           <td><%= Stujo::Git.current_branch %></td>
         </tr>
         <tr>
-          <td>Commit</td>
-          <td><%= Stujo::Git.current_commit %></td>
-        </tr>
-        <tr>
-          <td>Updated</td>
-          <td><%= Stujo::Git.current_update %></td>
-        </tr>
-        <tr>
-          <td>Tag</td>
-          <td><%= Stujo::Git.current_tag %></td>
+          <td>Timestamp</td>
+          <td><%= Stujo::Git.current_timestamp %> (<%= time_ago_in_words Time.at(Stujo::Git.current_timestamp) %>)</td>
         </tr>
       </table>
     </div>
