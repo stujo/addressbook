@@ -64,6 +64,7 @@ end
         file.write(output)
       }
 
+      
       load rb_file
 
       info = "#{Stujo::Git.current_tag},#{Stujo::Git.current_branch},#{Stujo::Git.current_commit},#{Stujo::Git.current_update}"
