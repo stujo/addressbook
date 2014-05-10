@@ -1,19 +1,19 @@
 module Stujo
   module Git
     def self.raw_current_remote
-      'origin'
+      'heroku'
     end
     def self.raw_current_branch
-      'master'
+      'testv'
     end
     def self.raw_current_commit
-      '3b2e1337ceaf59b84ce7ecdfc2befed897a27cc5'
+      'cf0a99733d25bd0f31f7e9046fc7673f9082a25e'
     end
     def self.raw_current_update
-      '2014-05-09 16:53:40 -0700'
+      '2014-05-09 17:01:36 -0700'
     end
     def self.raw_current_tag
-      'sgv33'
+      'sgv34'
     end
   end
 end
