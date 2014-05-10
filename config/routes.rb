@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#contacts', as: :search_contacts
   get '/advanced_search', to: 'search#advanced_contacts', as: :search_advanced_contacts
+  get '/ransack', to: 'search#ransack', as: :search_ransack_contacts
 end

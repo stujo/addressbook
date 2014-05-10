@@ -52,4 +52,6 @@ gem 'simple_form', '~> 3.1.0.rc1'
 
 gem 'rails_12factor', group: [:production]
 
+gem 'ransack'
+
 
