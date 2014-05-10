@@ -9,16 +9,7 @@ namespace :stujo do
 
     def tag_info_lookup
       latest_tag = `git describe --abbrev=0 --tags`
-      next_tag = 1
-      match = latest_tag[/sgv(.*)/, 1]
-
-      if match.blank?
-
-      else
-        next_tag = (1 + match.to_i) + "." + Time.now.to_i
-      end
-
-
+      next_tag = Time.now.to_i.to_s
 
       {
           full: "#{TAG_PREFIX}{#{next_tag}",
@@ -79,6 +70,7 @@ end
       CURRENT_BRANCH = "#{`git rev-parse --abbrev-ref HEAD`.strip}"
       CURRENT_COMMIT = "#{`git rev-parse --verify HEAD`.strip}"
       UPDATED_ON = Time.now
+      SGV_TAG = tag_info[:full]
 
       puts "Git State : #{SGV_TAG},#{CURRENT_REMOTE},#{CURRENT_BRANCH},#{CURRENT_COMMIT},#{UPDATED_ON}"
 
@@ -102,7 +94,7 @@ end
       puts `git add #{rb_file}`
       puts `git commit -m'Version #{info}'`
 
-      puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{next_tag}'`
+      puts adding_tag = `git tag -a #{SGV_TAG} -m 'AutoTag #{tag_info[:full]}'`
 
     end
   end
