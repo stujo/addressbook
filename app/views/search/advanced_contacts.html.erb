@@ -19,4 +19,10 @@
     </div>
 <% end %>
 
+<div class="well">
+  <%= link_to search_ransack_contacts_path do %>
+      <span class="hidden-xs">Need Even More Tools? - </span>Try Our Ransack Search
+  <% end %>
+</div>
+
 <%= render partial: 'contacts_results', locals: {contacts: @contacts} %>
