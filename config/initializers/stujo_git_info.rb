@@ -4,7 +4,7 @@ module Stujo
       'ransack'
     end
     def self.raw_current_timestamp
-      1399777960
+      1399778140
     end
   end
 end
