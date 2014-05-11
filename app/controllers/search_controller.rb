@@ -9,7 +9,7 @@ class SearchController < ApplicationController
   def contacts
     @search_form = SearchForm.new(search_params)
     if (@search_form.valid?)
-      @contacts = prep_pagination @search_form.get_contacts
+      @contacts = prep_pagination @search_form.search Contact.all, :first_name
     end
   end
 
@@ -24,8 +24,13 @@ class SearchController < ApplicationController
 
   def ransack
     @search = Contact.search(params[:q])
-    @contacts = prep_pagination @search.result
+    @contacts = prep_pagination(@search.result, 10)
+
+    # Only required if we are using the complex form
     @search.build_condition
+
+    # Only required if we are using sorting
+    @search.build_sort if @search.sorts.empty?
   end
 
   private

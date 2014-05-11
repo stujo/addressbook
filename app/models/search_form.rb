@@ -3,25 +3,16 @@ class SearchForm
 
   attr_accessor :q #Generic NAME Search
 
-  #validates_length_of :q, minimum: 3, message: 'Please enter at least 3 letters to search'
+  validates_length_of :q, minimum: 2, message: 'At least 2 letters'
 
   def persisted?
     false
   end
 
-  def add_q_query_if_present query
+  def search scope, column_name
     unless self.q.blank?
-      query = query.where("first_name = :q OR last_name = :q", {q: self.q})
+      scope = scope.where(column_name => self.q)
     end
-    query
-  end
-
-
-  def get_contacts
-    query = Contact.all
-
-    query = add_q_query_if_present(query)
-
-    query
+    scope
   end
 end

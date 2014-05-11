@@ -14,4 +14,9 @@ class Contact < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+
+  def self.ransackable_attributes(auth_object = nil)
+    [:first_name, :last_name]
+  end
 end
