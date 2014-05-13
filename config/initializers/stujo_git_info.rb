@@ -4,7 +4,7 @@ module Stujo
       'add_flash'
     end
     def self.raw_current_timestamp
-      1400017796
+      1400017816
     end
   end
 end
