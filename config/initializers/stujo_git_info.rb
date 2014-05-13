@@ -1,10 +1,10 @@
 module Stujo
   module Git
     def self.raw_current_branch
-      'ransack'
+      'gon_demo'
     end
     def self.raw_current_timestamp
-      1399867126
+      1400021377
     end
   end
 end

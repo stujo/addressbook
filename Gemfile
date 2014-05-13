@@ -54,4 +54,8 @@ gem 'rails_12factor', group: [:production]
 
 gem 'ransack'
 
+gem 'gon'
+
+
+
 

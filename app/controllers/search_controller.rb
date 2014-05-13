@@ -8,6 +8,9 @@ class SearchController < ApplicationController
 
   def contacts
     @search_form = SearchForm.new(search_params)
+
+    gon.search_params = search_params
+
     if (@search_form.valid?)
       @contacts = prep_pagination @search_form.search Contact.all, :first_name
     end
