@@ -1,10 +1,10 @@
 module Stujo
   module Git
     def self.raw_current_branch
-      'ransack'
+      'add_flash'
     end
     def self.raw_current_timestamp
-      1399867126
+      1400017679
     end
   end
 end

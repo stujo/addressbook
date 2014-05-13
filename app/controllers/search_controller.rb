@@ -6,6 +6,7 @@ class SearchController < ApplicationController
     4 # Because we display full data
   end
 
+
   def contacts
     @search_form = SearchForm.new(search_params)
     if (@search_form.valid?)
