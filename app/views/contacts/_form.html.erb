@@ -9,16 +9,28 @@
     <h3>Contact Info</h3>
     <%= f.input :first_name, placeholder: 'First Name' %>
     <%= f.input :last_name, placeholder: 'Last Name' %>
-    <%= f.input :dob,:as => :string  %>
-    <%= f.input :gender, label: 'Gender', collection: [ [Contact::GENDER_MALE, 'Male' ], [Contact::GENDER_FEMALE, 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @contact.gender, item_wrapper_class: 'inline' %>
+    <%= f.input :dob, :as => :string %>
+    <%= f.input :gender, label: 'Gender', collection: [[Contact::GENDER_MALE, 'Male'], [Contact::GENDER_FEMALE, 'Female']], as: :radio_buttons, label_method: :last, value_method: :first, checked: @contact.gender, item_wrapper_class: 'inline' %>
 
-    <h3>Add Phone Number</h3>
-    <%= f.simple_fields_for :phones, @contact.phones.build do |p| %>
-        <%= p.input :digits %>
-    <% end %>
+
+    <div class="duplicatable_nested_form_container">
+      <h3>Add Phone Number</h3>
+      <div class="duplicatable_nested_form">
+        <%= f.simple_fields_for :phones, @contact.phones.build do |p| %>
+            <%= p.input :digits %>
+            <% if p.object.new_record? %>
+                <%= link_to 'Remove', '', :remote => true, :class => 'destroy_duplicate_nested_form' %>
+            <% else %>
+                <%= link_to 'Remove', contact_phone_path(@contact, p.object), :method => :delete, :remote => true, :class => 'destroy_duplicate_nested_form' %>
+            <% end %>
+            <%= p.input :id, as: :hidden %>
+        <% end %>
+      </div>
+      <%= link_to 'Add Another Phone Number', '', :class => 'duplicate_nested_form' %>
+    </div>
 
     <h3>Add Address</h3>
-    <%= f.simple_fields_for :addresses, @contact.addresses.build  do |a| %>
+    <%= f.simple_fields_for :addresses, @contact.addresses.build do |a| %>
         <%= a.input :street %>
         <%= a.input :street_2 %>
         <%= a.input :city %>
@@ -27,6 +39,6 @@
     <% end %>
 
 
-    <%= f.button :submit  %>
+    <%= f.button :submit %>
 
 <% end %>
