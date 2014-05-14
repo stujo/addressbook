@@ -23,7 +23,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'spring',        group: :development
@@ -46,12 +46,19 @@ gem 'rspec-rails', group: [:development, :test]
 gem 'kaminari'
 #gem 'bootstrap-kaminari-views'
 
-gem 'quiet_assets'
-
 gem 'simple_form', '~> 3.1.0.rc1'
 
 gem 'rails_12factor', group: [:production]
 
 gem 'ransack'
 
+group :development do
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'awesome_print'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+end
 

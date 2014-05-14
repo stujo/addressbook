@@ -6,10 +6,27 @@
                                        file: :horizontal_file_input,
                                        boolean: :horizontal_boolean}) do |f| %>
     <%= f.error_notification %>
+    <h3>Contact Info</h3>
     <%= f.input :first_name, placeholder: 'First Name' %>
     <%= f.input :last_name, placeholder: 'Last Name' %>
     <%= f.input :dob,:as => :string  %>
     <%= f.input :gender, label: 'Gender', collection: [ [Contact::GENDER_MALE, 'Male' ], [Contact::GENDER_FEMALE, 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @contact.gender, item_wrapper_class: 'inline' %>
+
+    <h3>Add Phone Number</h3>
+    <%= f.simple_fields_for :phones, @contact.phones.build do |p| %>
+        <%= p.input :digits %>
+    <% end %>
+
+    <h3>Add Address</h3>
+    <%= f.simple_fields_for :addresses, @contact.addresses.build  do |a| %>
+        <%= a.input :street %>
+        <%= a.input :street_2 %>
+        <%= a.input :city %>
+        <%= a.input :state %>
+        <%= a.input :zip %>
+    <% end %>
+
+
     <%= f.button :submit  %>
 
 <% end %>

@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
   def over50s
     @today = Time.now
     @then = @today - 50.years
-    @contacts = prep_pagination Contact.where('dob < :then', {then: @then} )
+    @contacts = prep_pagination Contact.where('dob < :then', {then: @then})
     @filter_label = 'Over 50\'s'
     render 'filtered'
   end
@@ -35,10 +35,14 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.phones.build
+    @contact.addresses.build
   end
 
   # GET /contacts/1/edit
   def edit
+    @contact.phones.build
+    @contact.addresses.build
   end
 
   # POST /contacts
@@ -82,13 +86,13 @@ class ContactsController < ApplicationController
   # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:first_name, :last_name, :dob, :gender)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:first_name, :last_name, :dob, :gender, :phones_attributes => [:digits, :phone_type], :addresses_attributes => [:street, :street_2, :city, :state, :zip, :phone_type])
+  end
 end

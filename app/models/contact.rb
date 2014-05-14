@@ -15,6 +15,10 @@ class Contact < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  accepts_nested_attributes_for :phones
+  accepts_nested_attributes_for :addresses
+
+
   #
   # def self.ransackable_attributes(auth_object = nil)
   #   [:first_name, :last_name]
