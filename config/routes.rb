@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     resources :addresses
     resources :phones
 
+    member do
+      get 'message'
+      post 'send_message'
+    end
+
     collection do
       get 'over50s'
       get 'males'

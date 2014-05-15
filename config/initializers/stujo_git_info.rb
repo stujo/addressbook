@@ -4,7 +4,7 @@ module Stujo
       'emailing'
     end
     def self.raw_current_timestamp
-      1400173779
+      1400175798
     end
   end
 end
