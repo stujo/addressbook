@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+  # Global Basic Auth Authentication
+  before_filter :authenticate
+
+
   def prep_pagination scope, page_size = nil
     @pagintation_scopes ||= []
     #Save for Debugging
@@ -23,5 +27,11 @@ class ApplicationController < ActionController::Base
     10
   end
 
+  protected
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['AUTH_USERNAME'] && password == ENV['AUTH_PASSWORD']
+    end
+  end
 
 end
