@@ -65,3 +65,9 @@ group :development do
   gem 'pry-rails'
   gem 'pry-byebug'
 end
+
+
+# Gemfile
+gem 'sidekiq'
+
+

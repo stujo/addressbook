@@ -19,6 +19,7 @@ class MessageForm
   end
 
   def send_message
-    @message_status = ContactMailer.send_message(self).deliver
+    @message_status = ContactMailer.delay.send_message(self)
   end
 end
+
