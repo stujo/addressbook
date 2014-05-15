@@ -65,7 +65,9 @@ group :development do
 end
 
 
-# Gemfile
 gem 'sidekiq'
 
+gem 'unicorn'
+
+gem 'foreman'
 
