@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p class="message_greeting">Message for <%= @message.contact.first_name %></p>
+<hr/>
+
+<h1 class="message_subject"><%= @message.message_subject %></h1>
+
+<div class="message_body"><%= raw @message.message_body %></div>
+
+<p>&nbsp;</p>
+<hr/>
+<p>&nbsp;</p>
+<p>Thanks for being my friend!</p>
+<p>This message was sent by Address Book</p>
+</body>
+</html>
