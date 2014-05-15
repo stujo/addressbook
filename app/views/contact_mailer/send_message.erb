@@ -4,12 +4,12 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<p class="message_greeting">Message for <%= @message.contact.first_name %></p>
+<p class="message_greeting">Message for <%= @message.first_name %></p>
 <hr/>
 
-<h1 class="message_subject"><%= @message.message_subject %></h1>
+<h1 class="message_subject"><%= @message.subject %></h1>
 
-<div class="message_body"><%= raw @message.message_body %></div>
+<div class="message_body"><%= raw @message.body %></div>
 
 <p>&nbsp;</p>
 <hr/>

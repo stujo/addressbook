@@ -3,6 +3,6 @@ class ContactMailer < ActionMailer::Base
 
   def send_message(message)
     @message = message
-    mail(to: message.contact.email, subject: message.message_subject, )
+    mail(to: message.email, subject: message.subject)
   end
 end
