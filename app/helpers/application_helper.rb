@@ -39,5 +39,9 @@ module ApplicationHelper
 
   end
 
+  def basic_auth_logged_in?
+    not request.authorization.nil?
+  end
+
 
 end
