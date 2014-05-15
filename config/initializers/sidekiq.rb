@@ -2,6 +2,10 @@ require 'sidekiq'
 
 Sidekiq.configure_client do |config|
   config.redis = { :size => 1 }
+
+  unless ENV['REDISTOGO_URL'].blank?
+    config.redis[:url] = ENV['REDISTOGO_URL']
+  end
 end
 
 Sidekiq.configure_server do |config|
@@ -10,5 +14,8 @@ Sidekiq.configure_server do |config|
   # specify this. For this demo I do
   # show it to understand the numbers
   config.redis = { :size => 7 }
-end
 
+  unless ENV['REDISTOGO_URL'].blank?
+    config.redis[:url] = ENV['REDISTOGO_URL']
+  end
+end
