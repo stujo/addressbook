@@ -1,11 +1,15 @@
 require 'sidekiq'
 
 Sidekiq.configure_client do |config|
-  config.redis = { :size => 1 }
+
+  options = {:size => 1}
 
   unless ENV['REDISTOGO_URL'].blank?
-    config.redis[:url] = ENV['REDISTOGO_URL']
+    options[:url] = ENV['REDISTOGO_URL']
   end
+
+  config.redis = options
+
 end
 
 Sidekiq.configure_server do |config|
@@ -13,9 +17,13 @@ Sidekiq.configure_server do |config|
   # concurrency value so you do not need to
   # specify this. For this demo I do
   # show it to understand the numbers
-  config.redis = { :size => 7 }
+
+  options = {:size => 7}
 
   unless ENV['REDISTOGO_URL'].blank?
-    config.redis[:url] = ENV['REDISTOGO_URL']
+    options[:url] = ENV['REDISTOGO_URL']
   end
+
+  config.redis = options
+
 end

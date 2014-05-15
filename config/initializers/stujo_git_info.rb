@@ -4,7 +4,7 @@ module Stujo
       'redis_for_email'
     end
     def self.raw_current_timestamp
-      1400186091
+      1400186523
     end
   end
 end
