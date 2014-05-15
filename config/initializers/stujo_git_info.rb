@@ -1,10 +1,10 @@
 module Stujo
   module Git
     def self.raw_current_branch
-      'emailing'
+      'redis_for_email'
     end
     def self.raw_current_timestamp
-      1400178246
+      1400179522
     end
   end
 end

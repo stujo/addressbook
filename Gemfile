@@ -46,8 +46,6 @@ gem 'rspec-rails', group: [:development, :test]
 gem 'kaminari'
 #gem 'bootstrap-kaminari-views'
 
-gem 'quiet_assets'
-
 gem 'simple_form', '~> 3.1.0.rc1'
 
 gem 'rails_12factor', group: [:production]
@@ -65,3 +63,9 @@ group :development do
   gem 'pry-rails'
   gem 'pry-byebug'
 end
+
+
+# Gemfile
+gem 'sidekiq'
+
+
