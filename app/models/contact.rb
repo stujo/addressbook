@@ -9,6 +9,9 @@ class Contact < ActiveRecord::Base
   validates_inclusion_of :gender, in: [nil, GENDER_MALE, GENDER_FEMALE], message: 'Please select either Male or Female'
   validates_presence_of :first_name, message: 'Please enter a name'
 
+  validates :email, :presence => false, :email => true
+
+
   has_many :addresses
   has_many :phones
   def full_name
