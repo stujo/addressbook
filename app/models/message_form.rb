@@ -1,6 +1,10 @@
 class MessageForm
   include ActiveModel::Model
 
+  def self.messaging_enabled
+    !(ENV["GMAIL_USERNAME"].blank? ||  ENV["GMAIL_PASSWORD"].blank?)
+  end
+
   attr_accessor :message_subject
   attr_accessor :message_body
   attr_accessor :contact

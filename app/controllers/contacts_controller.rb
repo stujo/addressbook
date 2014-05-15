@@ -29,12 +29,14 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/message
   def message
+    redirect_to edit_contact_path(@contact), notice: 'Messaging Disabled' unless MessageForm.messaging_enabled
     @message_form = MessageForm.new
     @message_form.contact = @contact
   end
 
   # POST /contacts/1/send_message
   def send_message
+    redirect_to edit_contact_path(@contact), notice: 'Messaging Disabled' unless MessageForm.messaging_enabled
     @message_form = MessageForm.new message_params
     @message_form.contact = @contact
     if @message_form.valid? && @message_form.send_message
