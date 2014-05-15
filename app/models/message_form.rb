@@ -2,7 +2,7 @@ class MessageForm
   include ActiveModel::Model
 
   def self.messaging_enabled
-    !(ENV["GMAIL_USERNAME"].blank? ||  ENV["GMAIL_PASSWORD"].blank?)
+    !(ENV["GMAIL_USERNAME"].blank? || ENV["GMAIL_PASSWORD"].blank?)
   end
 
   attr_accessor :message_subject
@@ -19,7 +19,16 @@ class MessageForm
   end
 
   def send_message
-    @message_status = ContactMailer.delay.send_message(self)
+
+    message_attributes = OpenStruct.new(
+        :email => self.contact.email,
+        :subject => self.message_subject,
+        :body => self.message_body,
+        :first_name => self.contact.first_name,
+        :last_name => self.contact.last_name
+    )
+
+    @message_status = ContactMailer.delay.send_message(message_attributes)
   end
 end
 
