@@ -76,7 +76,7 @@
         <li class="<%= 'active' if current_page?(edit_contact_path @contact) %>"><%= link_to "Edit", edit_contact_path(@contact) %></li>
         <li class="<%= 'active' if current_page?(contact_addresses_path(@contact)) %>"><%= link_to "Addresses", contact_addresses_path(@contact) %></li>
         <li class="<%= 'active' if current_page?(contact_phones_path(@contact)) %>"><%= link_to "Phone Numbers", contact_phones_path(@contact) %></li>
-        <% if MessageForm.messaging_enabled %>
+        <% if @contact.messaging_possible? %>
             <li class="<%= 'active' if current_page?(message_contact_path(@contact)) %>"><%= link_to "Send Message", message_contact_path(@contact) %></li>
         <% end %>
       </ul>

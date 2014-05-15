@@ -11,6 +11,9 @@ class Contact < ActiveRecord::Base
 
   validates :email, :presence => false, :email => true
 
+  def messaging_possible?
+    MessageForm.messaging_enabled && !self.email.blank?
+  end
 
   has_many :addresses
   has_many :phones
