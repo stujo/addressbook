@@ -54,4 +54,14 @@ gem 'rails_12factor', group: [:production]
 
 gem 'ransack'
 
+gem 'dotenv-rails', :groups => [:development, :test]
 
+group :development do
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'awesome_print'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+end

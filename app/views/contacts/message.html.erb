@@ -1,0 +1,18 @@
+
+<div class="addressbook-commands"></div>
+
+<%= simple_form_for(@message_form,
+                    url: send_message_contact_path(@message_form.contact),
+                    html: {class: 'form-horizontal'},
+                    wrapper: :horizontal_form,
+                    wrapper_mappings: {check_boxes: :horizontal_radio_and_checkboxes,
+                                       radio_buttons: :horizontal_radio_and_checkboxes,
+                                       file: :horizontal_file_input,
+                                       boolean: :horizontal_boolean}) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :message_subject, class: 'form-control', placeholder: 'Subject',  label: 'Subject', :as => :string %>
+    <%= f.input :message_body, placeholder: 'Message', label: 'Message', :as => :text %>
+    <%= f.button :button do %>
+        Send!
+    <% end %>
+<% end %>
