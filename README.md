@@ -5,6 +5,14 @@ This sample app demonstrates Form objects and ActiveRecord::Relations
 
 ![CodeShip](https://www.codeship.io/projects/b2e134d0-b9c1-0131-5ab2-4202456fde48/status)
 
+#Basic Auth
+
+The following ENV parameters are used to support basic auth on the website, you'll be prompted
+for a username and password on your heroku app, you'll need to match these values to proceed
+leaving them blank will make your app easy to access.
+
+* AUTH_USERNAME=SomeString
+* AUTH_PASSWORD=AnotherString
 
 #Installation
 

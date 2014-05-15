@@ -4,7 +4,7 @@ module Stujo
       'basic_auth'
     end
     def self.raw_current_timestamp
-      1400188030
+      1400188362
     end
   end
 end
