@@ -35,14 +35,16 @@ $ redis-server /usr/local/etc/redis.conf
 [18994] 15 May 11:32:59.685 * DB loaded from disk: 0.001 seconds
 [18994] 15 May 11:32:59.685 * The server is now ready to accept connections on port 6379
 
-##Sidekiq
-A local sidekiq server needs to be running
+##Starting the servers with Sidekiq and Unicorn
+
+Using Foreman to start the unicorn server will spawn a sidekiq process
 
 ```
-$ bundle exec sidekiq
+$ export RACK_ENV=development; bundle exec foreman start
 ```
 
-##How it works
+
+##How mailing works
 
 Following this tutorial:
 
